@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { SiThemoviedatabase } from "react-icons/si";
 
 export const Container = styled.div`
-  width: 100vw;
   height: 70px;
+
+
+  width: 100%;
   background-color: var(--color-dark-blue);
   color: var(--color-light-blue);
   display: flex;

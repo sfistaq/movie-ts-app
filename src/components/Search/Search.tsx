@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Results from "../Results/Results";
 
-import { Container, Form, Input, Label, Select, Option } from "./Search.styles";
-
-
+import {
+  Container,
+  Status,
+  Form,
+  Input,
+  Select,
+  Option,
+  Button,
+  ResultsContainer,
+} from "./Search.styles";
 
 const searchMovie = async (
   page: number,
@@ -15,6 +22,7 @@ const searchMovie = async (
   const response = await fetch(
     `http://www.omdbapi.com/?s=${title}&plot=full&page=${page}&y=${year}&type=${type}&apikey=ba1bc38c`
   );
+
   return response.json();
 };
 
@@ -23,74 +31,91 @@ const searchMovie = async (
 // ?t= szukanie po tytulach
 
 const Search: React.FC = () => {
-  // przenieś do context
+  //! state
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchYear, setSearchYear] = useState<number | null>(null);
 
   const [title, setTitle] = useState<string>(""); // tytół szukanego filmu
-  const [type, setType] = useState<string>("movie"); // menu wyboru movie, series, game
   const [year, setYear] = useState<number | null>(null); // opcjonalne pole szukania po roku
-  const [page, setPage] = useState<number>(1); 
+  const [type, setType] = useState<string>("movie");
+  const [page, setPage] = useState<number>(1);
 
-
-
-  const { data, status, isLoading, error } = useQuery(
-    ["movies", page, title, year, type],
-    () => searchMovie(page, title, year, type)
+  //! query
+  const { data, status } = useQuery(["movies", page, title, year, type], () =>
+    searchMovie(page, title, year, type)
   );
 
+  //! submit
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setTitle(searchTitle);
-    setYear(searchYear)
+    setYear(searchYear);
+    setPage(1);
   };
 
+  //! change
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    setType((event.currentTarget.value));
+    setType(event.currentTarget.value);
+    setPage(1);
   };
 
- 
-
-  const currentYear= new Date().getFullYear(); 
-  
-
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <Container>
-      {status === "loading" && <div>Loading...</div>}
-      {!title && <div>Search some {type}</div>}
-      {data && data.Error === 'Movie not found!' && <div>{type} not found!</div>}
-      
+      {status === "loading" && <Status>Loading...</Status>}
+      {!title && <Status>Search some {type}...</Status>}
+      {data &&
+        data.Error !== "Incorrect IMDb ID." &&
+        data.Response === "False" && <Status>{type} not found!</Status>}
+      {data && data.Response === "True" && (
+        <Status>
+          we are found {data.totalResults}&nbsp;
+          {type}
+          {type === "series" ? "" : "s"}
+        </Status>
+      )}
+
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Input
+          minLength={3}
+          maxLength={60}
+          required
           type="text"
-          placeholder="title"
+          placeholder={`${type} title`}
           value={searchTitle}
+          inputWidth={200}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTitle(event.target.value)
           }
         />
-        <Input type='number' placeholder='year' min={1888} max={currentYear}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setSearchYear(+event.target.value)
-        } />
+        <Input
+          inputWidth={70}
+          type="number"
+          placeholder="year"
+          min={1888}
+          max={new Date().getFullYear()}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchYear(+event.target.value)
+          }
+        />
 
-        <Label >Chose Type</Label>
-        <Select value={type} onChange={handleChange} >
-          <Option value='movie'>Movie</Option>
-          <Option value='series'>Series</Option>
-          <Option value='game'>Game</Option>
+        <Select value={type} onChange={handleChange} inputWidth={80}>
+          <Option value="movie">Movie</Option>
+          <Option value="series">Series</Option>
+          <Option value="game">Game</Option>
         </Select>
 
-
-        <button>Search</button>
+        <Button>Search</Button>
       </Form>
-      {data && title && data.Response !== "False" && (
-           <Results data={data} page={page} setPage={setPage} />
-
-       
-      )}
+      <ResultsContainer>
+        {data && title && data.Response !== "False" && (
+          <Results data={data} page={page} setPage={setPage} />
+        )}
+      </ResultsContainer>
     </Container>
   );
 };

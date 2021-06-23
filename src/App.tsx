@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+import { Container, Sections } from "./styles/App.styles";
+
 import Topbar from "./components/Topbar/Topbar";
 import Search from "./components/Search/Search";
 import WatchList from "./components/WatchList/WatchList";
@@ -12,19 +14,23 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Global />
-        <Topbar />
-        <Switch>
-          <Route path="/" exact component={Search} />
-          <Route path="/watchlist" component={WatchList} />
-          <Route path="/watched" component={Watched} />
-          <Redirect to="/" />
-        </Switch>
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <Container>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Global />
+          <Topbar />
+          <Sections>
+            <Switch>
+              <Route path="/" exact component={Search} />
+              <Route path="/watchlist" component={WatchList} />
+              <Route path="/watched" component={Watched} />
+              <Redirect to="/" />
+            </Switch>
+          </Sections>
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </Container>
   );
 }
 
