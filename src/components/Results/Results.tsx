@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Container,
   ResultsItems,
@@ -42,7 +43,11 @@ const Results: React.FC<Props> = ({ data, page, setPage }) => {
     <Container>
       <ResultsItems>
         {data.Search.map((item) => (
-          <Card key={item.imdbID}>
+          <Card
+            onClick={() => console.log(item)}
+            key={item.imdbID}
+            to={`/details/${item.imdbID}`}
+          >
             <Image
               src={item.Poster === "N/A" ? blankPosterImage : item.Poster}
               alt={item.Title}

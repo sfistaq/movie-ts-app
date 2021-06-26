@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -15,7 +16,7 @@ export const ResultsItems = styled.div`
   grid-template-rows: repeat(2, 1fr);
 `;
 
-export const Card = styled.div`
+export const Card = styled(Link)`
   background-color: white;
   height: 300px;
   width: 200px;
@@ -23,6 +24,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
+
   overflow: hidden;
   transition: all 0.3s ease;
 

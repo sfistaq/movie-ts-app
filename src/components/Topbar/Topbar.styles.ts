@@ -4,8 +4,6 @@ import { SiThemoviedatabase } from "react-icons/si";
 
 export const Container = styled.div`
   height: 70px;
-
-
   width: 100%;
   background-color: var(--color-dark-blue);
   color: var(--color-light-blue);
@@ -13,6 +11,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   position: fixed;
+  z-index: 100;
 `;
 
 export const MovieIcon = styled(SiThemoviedatabase)`
