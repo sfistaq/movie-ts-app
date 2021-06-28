@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
-import { useQuery } from "react-query";
-import Results from "../Results/Results";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { MovieContext } from "../../store/GlobalState";
+import { useQuery } from "react-query";
+
+import Results from "../Results/Results";
 
 import {
   Container,
@@ -41,6 +42,7 @@ const Search: React.FC = () => {
   //! state
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchYear, setSearchYear] = useState<number | null>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
 
   //! query
   const { data, status } = useQuery(
@@ -62,6 +64,8 @@ const Search: React.FC = () => {
     setTypeHandler(event.currentTarget.value);
     setPageHandler(1);
   };
+
+  console.log(titleRef.current?.value);
 
   return (
     <Container>
@@ -87,6 +91,7 @@ const Search: React.FC = () => {
           placeholder={`${searchType} title`}
           value={searchTitle}
           inputWidth={200}
+          ref={titleRef}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTitle(event.target.value)
           }

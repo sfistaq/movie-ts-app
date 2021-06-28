@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  //width & height ogarnięte w App.styles.ts
-  background: var(--color-light-blue);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,27 +9,27 @@ export const Container = styled.section`
 `;
 
 export const Status = styled.p`
-  margin: 90px 0 20px 0;
-  font-size: 20px;
-  font-weight: bold;
+  margin: 75px 0 5px 0;
+  font-size: 12px;
+  /* font-weight: bold; */
   color: var(--color-dark-blue);
 `;
 
 export const Form = styled.form`
   width: 100%;
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-basis: 0;
   justify-content: center;
 `;
 
 export const Input = styled.input<{ inputWidth: number }>`
-  padding: 10px;
+  padding: 8px;
   border-radius: 10px;
   outline: none;
   border: none;
   width: ${(props) => `${props.inputWidth}px`};
-  margin: 0 5px;
+  margin: 0 10px;
   color: var(--color-blue);
   transition: all 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;

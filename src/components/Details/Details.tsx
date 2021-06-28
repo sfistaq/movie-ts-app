@@ -18,8 +18,6 @@ const detailsQuery = async (id: string) => {
   return response.json();
 };
 
-//"http://www.omdbapi.com/?i=tt3896198&apikey=ba1bc38c"
-
 interface ParamTypes {
   id: string;
 }
@@ -30,18 +28,23 @@ const Details: React.FC = () => {
   //! query
   const { data } = useQuery(["details", id], () => detailsQuery(id));
 
-  if (data) {
+  //TODO funkcje dodaj do context
+  const addToWatchlist = () => {
     console.log(data);
-  }
-  // uzyj use history w button back
+  };
+
+  const addToWatched = () => {
+    console.log(data);
+  };
+
   return (
     <Container>
       {data && (
         <Wrapper>
           <Left>
             <Image src={data.Poster} alt={data.Title} />
-            <Button>Add To Watchlist</Button>
-            <Button>Add To Watched</Button>
+            <Button onClick={addToWatchlist}>Add To Watchlist</Button>
+            <Button onClick={addToWatched}>Add To Watched</Button>
           </Left>
           <Right>
             <h2>{data.Title}</h2>

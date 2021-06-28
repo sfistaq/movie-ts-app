@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 }
 html {
   box-sizing: border-box;
+  background: var(--color-light-blue); //TODO np dodaj texture jako tło ;)
 }
 //!globalne zmienne z kolorami
 :root {

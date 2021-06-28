@@ -1,4 +1,4 @@
-type SearchTypes = {
+type MovieReducerTypes = {
   title: string;
   year: number | null;
   page: number;
@@ -12,7 +12,10 @@ type Action =
   | { type: "SET_TYPE"; searchType: string }
   | { type: "" };
 
-const movieReducer = (state: SearchTypes, action: Action): SearchTypes => {
+const movieReducer = (
+  state: MovieReducerTypes,
+  action: Action
+): MovieReducerTypes => {
   switch (action.type) {
     case "SET_TITLE":
       return {

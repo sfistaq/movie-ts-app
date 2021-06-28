@@ -12,26 +12,35 @@ export const Container = styled.div`
 export const ResultsItems = styled.div`
   display: grid;
   height: 100%;
-  margin: 50px 0 50px 0;
-  grid-gap: 10px;
+  margin: 30px 0 20px 0;
+  grid-gap: 20px;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
 `;
 
 export const Card = styled(Link)`
   background-color: white;
-  height: 300px;
-  width: 200px;
+  height: 280px;
+  width: 190px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
-
+  border-radius: 5px;
   overflow: hidden;
   transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--color-dark-blue);
+  background: var(
+    --color-light-blue
+  ); //TODO dodaj inny kolor do zmiennych globalnych
+
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 
   &:hover {
     transform: scale(1.03);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+      rgba(0, 0, 0, 0.05) 0px 5px 10px;
   }
 `;
 
