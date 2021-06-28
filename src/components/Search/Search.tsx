@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useQuery } from "react-query";
 import Results from "../Results/Results";
+import { MovieContext } from "../../store/GlobalState";
 
 import {
   Container,
@@ -15,67 +16,65 @@ import {
 
 const searchMovie = async (
   page: number,
-  title: string | null,
+  title: string,
   year: number | null,
   type: string
 ) => {
   const response = await fetch(
-    `http://www.omdbapi.com/?s=${title}&plot=full&page=${page}&y=${year}&type=${type}&apikey=ba1bc38c`
+    `http://www.omdbapi.com/?s=${title}&page=${page}&y=${year}&type=${type}&apikey=ba1bc38c`
   );
-
   return response.json();
 };
 
-// ID SEARCH
-//"http://www.omdbapi.com/?i=tt3896198&apikey=ba1bc38c"
-// ?t= szukanie po tytulach
-
 const Search: React.FC = () => {
+  const {
+    title,
+    year,
+    page,
+    searchType,
+    setTitleHandler,
+    setYearHandler,
+    setPageHandler,
+    setTypeHandler,
+  } = useContext(MovieContext);
+
   //! state
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchYear, setSearchYear] = useState<number | null>(null);
 
-  const [title, setTitle] = useState<string>(""); // tytół szukanego filmu
-  const [year, setYear] = useState<number | null>(null); // opcjonalne pole szukania po roku
-  const [type, setType] = useState<string>("movie");
-  const [page, setPage] = useState<number>(1);
-
   //! query
-  const { data, status } = useQuery(["movies", page, title, year, type], () =>
-    searchMovie(page, title, year, type)
+  const { data, status } = useQuery(
+    ["movies", page, title, year, searchType],
+    () => searchMovie(page, title, year, searchType)
   );
 
   //! submit
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setTitle(searchTitle);
-    setYear(searchYear);
-    setPage(1);
+    setTitleHandler(searchTitle);
+    setYearHandler(searchYear);
+    setPageHandler(1);
   };
 
   //! change
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    setType(event.currentTarget.value);
-    setPage(1);
+    setTypeHandler(event.currentTarget.value);
+    setPageHandler(1);
   };
-
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <Container>
       {status === "loading" && <Status>Loading...</Status>}
-      {!title && <Status>Search some {type}...</Status>}
+      {!title && <Status>Search some {searchType}...</Status>}
       {data &&
         data.Error !== "Incorrect IMDb ID." &&
-        data.Response === "False" && <Status>{type} not found!</Status>}
+        data.Response === "False" && <Status>{searchType} not found!</Status>}
       {data && data.Response === "True" && (
         <Status>
           we are found {data.totalResults}&nbsp;
-          {type}
-          {type === "series" ? "" : "s"}
+          {searchType}
+          {searchType === "series" ? "" : "s"}
         </Status>
       )}
 
@@ -85,7 +84,7 @@ const Search: React.FC = () => {
           maxLength={60}
           required
           type="text"
-          placeholder={`${type} title`}
+          placeholder={`${searchType} title`}
           value={searchTitle}
           inputWidth={200}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -103,7 +102,7 @@ const Search: React.FC = () => {
           }
         />
 
-        <Select value={type} onChange={handleChange} inputWidth={80}>
+        <Select value={searchType} onChange={handleChange} inputWidth={80}>
           <Option value="movie">Movie</Option>
           <Option value="series">Series</Option>
           <Option value="game">Game</Option>
@@ -112,8 +111,8 @@ const Search: React.FC = () => {
         <Button>Search</Button>
       </Form>
       <ResultsContainer>
-        {data && title && data.Response !== "False" && (
-          <Results data={data} page={page} setPage={setPage} />
+        {data && data.Response !== "False" && (
+          <Results data={data} page={page} setPage={setPageHandler} />
         )}
       </ResultsContainer>
     </Container>

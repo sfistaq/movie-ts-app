@@ -7,10 +7,11 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   color: #000;
+  height: 100vh;
 `;
 
 export const Status = styled.p`
-  margin: 20px 0;
+  margin: 90px 0 20px 0;
   font-size: 20px;
   font-weight: bold;
   color: var(--color-dark-blue);
@@ -78,5 +79,4 @@ export const Button = styled.button`
 
 export const ResultsContainer = styled.div`
   width: 100%;
-  height: 80%;
 `;

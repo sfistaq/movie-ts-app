@@ -2,15 +2,17 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 
 export const ResultsItems = styled.div`
   display: grid;
+  height: 100%;
+  margin: 50px 0 50px 0;
   grid-gap: 10px;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
