@@ -1,5 +1,5 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
-import { MovieContext } from "../../store/GlobalState";
+import React, { useState, useContext, useRef } from "react";
+import { SearchContext } from "../../store/SearchState";
 import { useQuery } from "react-query";
 
 import Results from "../Results/Results";
@@ -37,12 +37,12 @@ const Search: React.FC = () => {
     setYearHandler,
     setPageHandler,
     setTypeHandler,
-  } = useContext(MovieContext);
+  } = useContext(SearchContext);
 
   //! state
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchYear, setSearchYear] = useState<number | null>(null);
-  const titleRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null); //TODO
 
   //! query
   const { data, status } = useQuery(
@@ -117,7 +117,12 @@ const Search: React.FC = () => {
       </Form>
       <ResultsContainer>
         {data && data.Response !== "False" && (
-          <Results data={data} page={page} setPage={setPageHandler} />
+          <Results
+            data={data}
+            page={page}
+            setPage={setPageHandler}
+            buttons={true}
+          />
         )}
       </ResultsContainer>
     </Container>

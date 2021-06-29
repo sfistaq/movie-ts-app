@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
-import movieReducer from "./MovieReducer";
+import searchReducer from "./SearchReducer";
 
-type ContextType = {
+interface SearchTypes {
   title: string;
   year: number | null;
   page: number;
@@ -10,9 +10,9 @@ type ContextType = {
   setYearHandler: (year: number | null) => void;
   setPageHandler: (page: number) => void;
   setTypeHandler: (type: string) => void;
-};
+}
 
-const initState: ContextType = {
+const initState: SearchTypes = {
   title: "",
   year: null,
   page: 1,
@@ -23,10 +23,10 @@ const initState: ContextType = {
   setTypeHandler: () => {},
 };
 
-export const MovieContext = createContext<ContextType>(initState);
+export const SearchContext = createContext<SearchTypes>(initState);
 
-const GlobalState: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(movieReducer, initState);
+const SearchState: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(searchReducer, initState);
 
   const setTitleHandler = (title: string) => {
     dispatch({
@@ -34,6 +34,7 @@ const GlobalState: React.FC = ({ children }) => {
       title: title,
     });
   };
+
   const setYearHandler = (year: number | null) => {
     dispatch({
       type: "SET_YEAR",
@@ -47,6 +48,7 @@ const GlobalState: React.FC = ({ children }) => {
       page: page,
     });
   };
+
   const setTypeHandler = (type: string) => {
     dispatch({
       type: "SET_TYPE",
@@ -55,7 +57,7 @@ const GlobalState: React.FC = ({ children }) => {
   };
 
   return (
-    <MovieContext.Provider
+    <SearchContext.Provider
       value={{
         title: state.title,
         year: state.year,
@@ -68,8 +70,8 @@ const GlobalState: React.FC = ({ children }) => {
       }}
     >
       {children}
-    </MovieContext.Provider>
+    </SearchContext.Provider>
   );
 };
 
-export default GlobalState;
+export default SearchState;

@@ -31,10 +31,10 @@ interface Props {
   data: Data;
   page: number;
   setPage: (num: number) => void;
+  buttons: boolean;
 }
 
-//! JEZELI POSTER = 'N/A' DODAJ POSTER ZASTĘPCZY
-const Results: React.FC<Props> = ({ data, page, setPage }) => {
+const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
   const searchResultsLength = +data.totalResults;
   const pagesNumber =
     searchResultsLength <= 10 ? 1 : Math.floor(+data.totalResults / 10);
@@ -56,22 +56,24 @@ const Results: React.FC<Props> = ({ data, page, setPage }) => {
           </Card>
         ))}
       </ResultsItems>
-      <ButtonsContainer>
-        <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          PREV
-        </Button>
-        <Pages>
-          {page} / {pagesNumber}
-        </Pages>
-        <Button
-          disabled={
-            page === Math.floor(+data.totalResults / 10) || pagesNumber === 1
-          }
-          onClick={() => setPage(page + 1)}
-        >
-          NEXT
-        </Button>
-      </ButtonsContainer>
+      {buttons && (
+        <ButtonsContainer>
+          <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
+            PREV
+          </Button>
+          <Pages>
+            {page} / {pagesNumber}
+          </Pages>
+          <Button
+            disabled={
+              page === Math.floor(+data.totalResults / 10) || pagesNumber === 1
+            }
+            onClick={() => setPage(page + 1)}
+          >
+            NEXT
+          </Button>
+        </ButtonsContainer>
+      )}
     </Container>
   );
 };

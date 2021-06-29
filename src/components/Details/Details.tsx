@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { FavouriteContext } from "../../store/FavouriteState";
 import {
   Container,
   Wrapper,
@@ -24,18 +26,30 @@ interface ParamTypes {
 
 const Details: React.FC = () => {
   const { id } = useParams<ParamTypes>(); // params z linku z routera
+  const { watchlist, addToFavourite, removeFromFavourite } =
+    useContext(FavouriteContext);
+  const history = useHistory();
 
   //! query
   const { data } = useQuery(["details", id], () => detailsQuery(id));
 
-  //TODO funkcje dodaj do context
   const addToWatchlist = () => {
-    console.log(data);
+    addToFavourite(data);
+    history.push("/watchlist");
   };
 
-  const addToWatched = () => {
-    console.log(data);
+  const removeFromWatchlist = () => {
+    removeFromFavourite(data.imdbID);
+    history.push("/watchlist");
   };
+
+  let added: boolean = false;
+  if (data) {
+    const find = watchlist.find((item) => item.imdbID === data.imdbID);
+    if (find?.imdbID === data.imdbID) {
+      added = true;
+    }
+  }
 
   return (
     <Container>
@@ -43,8 +57,13 @@ const Details: React.FC = () => {
         <Wrapper>
           <Left>
             <Image src={data.Poster} alt={data.Title} />
-            <Button onClick={addToWatchlist}>Add To Watchlist</Button>
-            <Button onClick={addToWatched}>Add To Watched</Button>
+            {added ? (
+              <Button onClick={removeFromWatchlist}>
+                Remove From Watchlist
+              </Button>
+            ) : (
+              <Button onClick={addToWatchlist}>Add To Watchlist</Button>
+            )}
           </Left>
           <Right>
             <h2>{data.Title}</h2>

@@ -1,9 +1,9 @@
-type MovieReducerTypes = {
+interface MovieReducerTypes {
   title: string;
   year: number | null;
   page: number;
   searchType: string;
-};
+}
 
 type Action =
   | { type: "SET_TITLE"; title: string }

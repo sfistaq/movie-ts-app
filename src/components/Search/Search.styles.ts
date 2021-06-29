@@ -8,10 +8,10 @@ export const Container = styled.section`
   height: 100vh;
 `;
 
+//! dodaj czerwony kolor do status not found color + ternary
 export const Status = styled.p`
   margin: 75px 0 5px 0;
   font-size: 12px;
-  /* font-weight: bold; */
   color: var(--color-dark-blue);
 `;
 
