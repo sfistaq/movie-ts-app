@@ -1,11 +1,12 @@
 import React, { createContext, useReducer } from "react";
+import favouriteReducer from "./FavouriteReducer";
 
 interface RatingsType {
   Source: string;
   Value: string;
 }
 
-interface DataType {
+interface DataTypes {
   Title: string;
   Year: string;
   Rated: string;
@@ -34,35 +35,23 @@ interface DataType {
 }
 
 interface ContextType {
-  watchlist: DataType[];
-  addToFavourite: (data: DataType) => void;
-  removeFromFavourite: (id: string) => void;
+  watchlist: DataTypes[];
+  watched: DataTypes[];
+  addToWatchlist: (data: DataTypes) => void;
+  removeFromWatchlist: (id: string) => void;
+  addToWatched: (data: DataTypes) => void;
+  removeFromWatched: (id: string) => void;
+  moveToWatched: (data: DataTypes) => void;
 }
-type Action =
-  | { type: "ADD_TO_FAVOURITE"; data: DataType }
-  | { type: "REMOVE_FROM_FAVOURITE"; id: string };
 
 const initState: ContextType = {
   watchlist: [],
-  addToFavourite: () => {},
-  removeFromFavourite: () => {},
-};
-
-const favouriteReducer = (state: ContextType, action: Action): ContextType => {
-  switch (action.type) {
-    case "ADD_TO_FAVOURITE":
-      return {
-        ...state,
-        watchlist: [action.data, ...state.watchlist],
-      };
-    case "REMOVE_FROM_FAVOURITE":
-      return {
-        ...state,
-        watchlist: state.watchlist.filter((item) => item.imdbID !== action.id),
-      };
-    default:
-      return state;
-  }
+  watched: [],
+  addToWatchlist: () => {},
+  removeFromWatchlist: () => {},
+  addToWatched: () => {},
+  removeFromWatched: () => {},
+  moveToWatched: () => {},
 };
 
 export const FavouriteContext = createContext<ContextType>(initState);
@@ -70,17 +59,36 @@ export const FavouriteContext = createContext<ContextType>(initState);
 const FavouriteState: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(favouriteReducer, initState);
 
-  const addToFavourite = (data: DataType) => {
+  const addToWatchlist = (data: DataTypes) => {
     dispatch({
-      type: "ADD_TO_FAVOURITE",
+      type: "ADD_TO_WATCHLIST",
       data: data,
     });
   };
 
-  const removeFromFavourite = (id: string) => {
+  const removeFromWatchlist = (id: string) => {
     dispatch({
-      type: "REMOVE_FROM_FAVOURITE",
+      type: "REMOVE_FROM_WATCHLIST",
       id: id,
+    });
+  };
+  const addToWatched = (data: DataTypes) => {
+    dispatch({
+      type: "ADD_TO_WATCHED",
+      data: data,
+    });
+  };
+
+  const removeFromWatched = (id: string) => {
+    dispatch({
+      type: "REMOVE_FROM_WATCHED",
+      id: id,
+    });
+  };
+  const moveToWatched = (data: DataTypes) => {
+    dispatch({
+      type: "MOVE_TO_WATCHED",
+      data: data,
     });
   };
 
@@ -88,8 +96,12 @@ const FavouriteState: React.FC = ({ children }) => {
     <FavouriteContext.Provider
       value={{
         watchlist: state.watchlist,
-        addToFavourite: addToFavourite,
-        removeFromFavourite: removeFromFavourite,
+        watched: state.watched,
+        addToWatchlist: addToWatchlist,
+        removeFromWatchlist: removeFromWatchlist,
+        addToWatched: addToWatched,
+        removeFromWatched: removeFromWatched,
+        moveToWatched: moveToWatched,
       }}
     >
       {children}

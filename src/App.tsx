@@ -3,13 +3,15 @@ import SearchState from "./store/SearchState";
 import FavouriteState from "./store/FavouriteState";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import Topbar from "./components/Topbar/Topbar";
 import Search from "./components/Search/Search";
 import Details from "./components/Details/Details";
-import WatchList from "./components/WatchList/WatchList";
+import WatchList from "./components/Favourites/WatchList";
+import Watched from "./components/Favourites/Watched";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +27,8 @@ function App() {
               <Switch>
                 <Route path="/" exact component={Search} />
                 <Route path="/details/:id" component={Details} />
-                <Route path="/watchlist" exact component={WatchList} />
+                <Route path="/watchlist" component={WatchList} />
+                <Route path="/watched" component={Watched} />
                 <Redirect to="/" />
               </Switch>
             </FavouriteState>

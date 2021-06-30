@@ -1,27 +1,30 @@
 import React, { useContext } from "react";
 import { FavouriteContext } from "../../store/FavouriteState";
 import { SearchContext } from "../../store/SearchState";
-import Results from "../Results/Results";
-import { Container, Status, ResultsContainer } from "./WatchList.styles";
 
-const WatchList: React.FC = () => {
-  const { watchlist } = useContext(FavouriteContext);
+import Results from "../Results/Results";
+
+import { Container, Status, ResultsContainer } from "./Favourites.styles";
+
+//TODO pagniacja po 10ciu
+const Watched: React.FC = () => {
+  const { watched } = useContext(FavouriteContext);
   const { page, setPageHandler } = useContext(SearchContext);
 
   const data = {
-    Response: watchlist.length === 0 ? "empty" : "added",
-    Search: watchlist,
-    totalResults: watchlist.length.toString(),
+    Response: watched.length === 0 ? "empty" : "added",
+    Search: watched,
+    totalResults: watched.length.toString(),
   };
 
   return (
     <Container>
       {data.Response === "empty" ? (
-        <Status>Add some movies to watchlist</Status>
+        <Status>Add some watched movies</Status>
       ) : (
         <Status>
-          {+data.totalResults} {+data.totalResults <= 1 ? "movie" : "movies"} in
-          your watchlist
+          {+data.totalResults} {+data.totalResults <= 1 ? "movie" : "movies"}{" "}
+          you watched
         </Status>
       )}
       <ResultsContainer>
@@ -36,4 +39,4 @@ const WatchList: React.FC = () => {
   );
 };
 
-export default WatchList;
+export default Watched;
