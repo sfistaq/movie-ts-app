@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { SearchContext } from "../../store/SearchState";
 import { useQuery } from "react-query";
 
@@ -12,13 +12,14 @@ import {
   Select,
   Option,
   Button,
+  SearchIcon,
   ResultsContainer,
 } from "./Search.styles";
 
 const searchMovie = async (
   page: number,
   title: string,
-  year: number | null,
+  year: string,
   type: string
 ) => {
   const response = await fetch(
@@ -41,8 +42,7 @@ const Search: React.FC = () => {
 
   //! state
   const [searchTitle, setSearchTitle] = useState<string>("");
-  const [searchYear, setSearchYear] = useState<number | null>(null);
-  const titleRef = useRef<HTMLInputElement>(null); //TODO
+  const [searchYear, setSearchYear] = useState<string>("");
 
   //! query
   const { data, status } = useQuery(
@@ -65,7 +65,11 @@ const Search: React.FC = () => {
     setPageHandler(1);
   };
 
-  console.log(titleRef.current?.value);
+  // treśc wyszukiwania zostaje w input po rerender
+  useEffect(() => {
+    setSearchTitle(title);
+    setSearchYear(`${year}`);
+  }, [title, year]);
 
   return (
     <Container>
@@ -73,7 +77,9 @@ const Search: React.FC = () => {
       {!title && <Status>Search some {searchType}...</Status>}
       {data &&
         data.Error !== "Incorrect IMDb ID." &&
-        data.Response === "False" && <Status>{searchType} not found!</Status>}
+        data.Response === "False" && (
+          <Status error>{searchType} not found!</Status>
+        )}
       {data && data.Response === "True" && (
         <Status>
           we are found {data.totalResults}&nbsp;
@@ -84,6 +90,7 @@ const Search: React.FC = () => {
 
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Input
+          autoFocus
           minLength={3}
           maxLength={60}
           required
@@ -91,7 +98,6 @@ const Search: React.FC = () => {
           placeholder={`${searchType} title`}
           value={searchTitle}
           inputWidth={200}
-          ref={titleRef}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTitle(event.target.value)
           }
@@ -101,9 +107,10 @@ const Search: React.FC = () => {
           type="number"
           placeholder="year"
           min={1888}
+          value={searchYear}
           max={new Date().getFullYear()}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchYear(+event.target.value)
+            setSearchYear(event.target.value)
           }
         />
 
@@ -113,7 +120,10 @@ const Search: React.FC = () => {
           <Option value="game">Game</Option>
         </Select>
 
-        <Button>Search</Button>
+        <Button>
+          Search
+          <SearchIcon />
+        </Button>
       </Form>
       <ResultsContainer>
         {data && data.Response !== "False" && (

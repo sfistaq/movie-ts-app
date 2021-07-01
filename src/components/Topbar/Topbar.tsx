@@ -9,37 +9,60 @@ import {
   LinksContainer,
   LinkItem,
   ItemCount,
+  MenuIcon,
+  CloseIcon,
+  Title,
 } from "./Topbar.styles";
 
-const Topbar: React.FC = () => {
-  const location = useLocation();
+interface Props {
+  menuOpen: boolean;
+  windowWidth: number;
+  menuOpenHanler: () => void;
+  closeMobileMenu: () => void;
+}
 
+const Topbar: React.FC<Props> = ({
+  menuOpen,
+  windowWidth,
+  menuOpenHanler,
+  closeMobileMenu,
+}) => {
+  const location = useLocation();
   const { watchlist, watched } = useContext(FavouriteContext);
 
-  console.log(watchlist.length, watched.length);
+  console.log(location.pathname.slice(1));
 
   return (
     <Container>
       <MovieIcon />
-      <LinksContainer>
-        {data.map((item) => (
-          <LinkItem
-            key={item.id}
-            to={item.link}
-            active={location.pathname === item.link}
-          >
-            {item.text}
+      {windowWidth > 768 && (
+        <LinksContainer>
+          {data.map((item) => (
+            <LinkItem
+              key={item.id}
+              to={item.link}
+              active={(location.pathname === item.link).toString()}
+            >
+              {item.text}
 
-            {item.text === "watchlist" && watchlist.length > 0 && (
-              <ItemCount>{watchlist.length}</ItemCount>
-            )}
-
-            {item.text === "watched" && watched.length > 0 && (
-              <ItemCount>{watched.length}</ItemCount>
-            )}
-          </LinkItem>
-        ))}
-      </LinksContainer>
+              {item.text === "watchlist" && watchlist.length > 0 && (
+                <ItemCount>{watchlist.length}</ItemCount>
+              )}
+              {item.text === "watched" && watched.length > 0 && (
+                <ItemCount>{watched.length}</ItemCount>
+              )}
+            </LinkItem>
+          ))}
+        </LinksContainer>
+      )}
+      {windowWidth < 768 && !menuOpen && (
+        <Title>{location.pathname.slice(1)}</Title>
+      )}
+      {menuOpen ? (
+        <CloseIcon onClick={closeMobileMenu} />
+      ) : (
+        <MenuIcon onClick={menuOpenHanler} />
+      )}
     </Container>
   );
 };

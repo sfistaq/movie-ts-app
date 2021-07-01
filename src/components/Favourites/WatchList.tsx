@@ -23,8 +23,8 @@ const WatchList: React.FC = () => {
         <Status>Add some movies to watchlist</Status>
       ) : (
         <Status>
-          {+data.totalResults} {+data.totalResults <= 1 ? "movie" : "movies"} in
-          your watchlist
+          You have {+data.totalResults}{" "}
+          {+data.totalResults <= 1 ? "title" : "titles"} in your watchlist
         </Status>
       )}
       <ResultsContainer>

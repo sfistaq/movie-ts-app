@@ -3,18 +3,18 @@ import searchReducer from "./SearchReducer";
 
 interface SearchTypes {
   title: string;
-  year: number | null;
+  year: string;
   page: number;
   searchType: string;
   setTitleHandler: (title: string) => void;
-  setYearHandler: (year: number | null) => void;
+  setYearHandler: (year: string) => void;
   setPageHandler: (page: number) => void;
   setTypeHandler: (type: string) => void;
 }
 
 const initState: SearchTypes = {
   title: "",
-  year: null,
+  year: "",
   page: 1,
   searchType: "movie",
   setTitleHandler: () => {},
@@ -35,7 +35,7 @@ const SearchState: React.FC = ({ children }) => {
     });
   };
 
-  const setYearHandler = (year: number | null) => {
+  const setYearHandler = (year: string) => {
     dispatch({
       type: "SET_YEAR",
       year: year,

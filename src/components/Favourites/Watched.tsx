@@ -6,7 +6,6 @@ import Results from "../Results/Results";
 
 import { Container, Status, ResultsContainer } from "./Favourites.styles";
 
-//TODO pagniacja po 10ciu
 const Watched: React.FC = () => {
   const { watched } = useContext(FavouriteContext);
   const { page, setPageHandler } = useContext(SearchContext);
@@ -23,8 +22,8 @@ const Watched: React.FC = () => {
         <Status>Add some watched movies</Status>
       ) : (
         <Status>
-          {+data.totalResults} {+data.totalResults <= 1 ? "movie" : "movies"}{" "}
-          you watched
+          You watched {+data.totalResults}{" "}
+          {+data.totalResults <= 1 ? "title" : "titles"}
         </Status>
       )}
       <ResultsContainer>

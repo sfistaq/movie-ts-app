@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { SiThemoviedatabase } from "react-icons/si";
+import { BiCameraMovie } from "react-icons/bi";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export const Container = styled.div`
   height: 70px;
@@ -14,9 +15,9 @@ export const Container = styled.div`
   z-index: 100;
 `;
 
-export const MovieIcon = styled(SiThemoviedatabase)`
-  font-size: 40px;
-  margin-left: 10px;
+export const MovieIcon = styled(BiCameraMovie)`
+  font-size: 60px;
+  margin-left: 20px;
   color: inherit;
 `;
 
@@ -27,14 +28,14 @@ export const LinksContainer = styled.ul`
   list-style: none;
 `;
 
-//TODO FIXNIJ PROPSA bo jest error na boolean
-export const LinkItem = styled(Link)<{ active: boolean }>`
+export const LinkItem = styled(Link)<{ active: string }>`
   font-size: 20px;
   text-transform: capitalize;
   margin: 0 20px;
   color: inherit;
   text-decoration: none;
-  color: ${({ active }) => (active ? "var(--color-gold)" : "inherit")};
+  color: ${({ active }) =>
+    active === "true" ? "var(--color-gold)" : "inherit"};
 
   &:hover {
     color: lightgoldenrodyellow;
@@ -49,4 +50,31 @@ export const ItemCount = styled.span`
   color: #fff;
   font-weight: 500;
   font-size: 10px;
+`;
+
+const icon = css`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    font-size: 40px;
+    margin-right: 20px;
+    color: inherit;
+    cursor: pointer;
+  } ;
+`;
+
+export const MenuIcon = styled(FaBars)`
+  ${icon}
+`;
+
+export const CloseIcon = styled(FaTimes)`
+  ${icon}
+`;
+
+export const Title = styled.div`
+  color: var(--color-gold);
+  list-style: none;
+  font-size: 30px;
+  text-transform: capitalize;
 `;

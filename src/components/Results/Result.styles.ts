@@ -26,19 +26,17 @@ export const Card = styled(Link)`
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
+  border: 3px solid white;
   overflow: hidden;
   transition: all 0.3s ease;
   text-decoration: none;
   color: var(--color-dark-blue);
-  background: var(
-    --color-light-blue
-  ); //TODO dodaj inny kolor do zmiennych globalnych
-
+  background: white;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
       rgba(0, 0, 0, 0.05) 0px 5px 10px;
   }
@@ -47,7 +45,7 @@ export const Card = styled(Link)`
 export const Image = styled.img`
   min-height: 80%;
   min-width: 100%;
-  object-fit: cover;
+  object-fit: fill;
 `;
 
 export const Description = styled.div`
@@ -56,8 +54,19 @@ export const Description = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: bold;
   text-align: center;
+`;
+export const Status = styled.span<{ top: string; color: string }>`
+  position: absolute;
+  width: 70px;
+  top: ${(props) => `${props.top}px`};
+  left: 5px;
+  padding: 5px 10px;
+  background: ${(props) => `${props.color}`};
+  color: #fff;
+  font-weight: 500;
+  font-size: 10px;
+  border: 2px solid white;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -71,7 +80,7 @@ export const ButtonsContainer = styled.div`
 //przenieś do global bo jest taki sam jak w search
 export const Button = styled.button`
   width: 80px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   outline: none;
   margin-left: 5px;

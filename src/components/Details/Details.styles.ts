@@ -23,7 +23,9 @@ export const Left = styled.div`
 
 export const Image = styled.img`
   margin-top: 50px;
-  border-radius: 10px;
+  border-radius: 5px;
+  border: 3px solid white;
+  object-fit: fill;
 `;
 
 // wyexportuj do pojedycznego komponentu bo sie powtarza ;)

@@ -1,16 +1,15 @@
 interface MovieReducerTypes {
   title: string;
-  year: number | null;
+  year: string;
   page: number;
   searchType: string;
 }
 
 type Action =
   | { type: "SET_TITLE"; title: string }
-  | { type: "SET_YEAR"; year: number | null }
+  | { type: "SET_YEAR"; year: string }
   | { type: "SET_PAGE"; page: number }
-  | { type: "SET_TYPE"; searchType: string }
-  | { type: "" };
+  | { type: "SET_TYPE"; searchType: string };
 
 const movieReducer = (
   state: MovieReducerTypes,

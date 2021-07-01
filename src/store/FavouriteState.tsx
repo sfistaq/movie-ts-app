@@ -59,6 +59,12 @@ export const FavouriteContext = createContext<ContextType>(initState);
 const FavouriteState: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(favouriteReducer, initState);
 
+  //TODO
+  // useEffect(() => {
+  //   localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
+  //   localStorage.setItem("watched", JSON.stringify(state.watched));
+  // }, [state]);
+
   const addToWatchlist = (data: DataTypes) => {
     dispatch({
       type: "ADD_TO_WATCHLIST",

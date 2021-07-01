@@ -12,6 +12,8 @@ import {
   Right,
 } from "./Details.styles";
 
+import blankPosterImage from "../../images/blank-poster.jpeg";
+
 const detailsQuery = async (id: string) => {
   const response = await fetch(
     `http://www.omdbapi.com/?i=${id}&plot=full&apikey=ba1bc38c`
@@ -90,7 +92,10 @@ const Details: React.FC = () => {
       {data && (
         <Wrapper>
           <Left>
-            <Image src={data.Poster} alt={data.Title} />
+            <Image
+              src={data.Poster === "N/A" ? blankPosterImage : data.Poster}
+              alt={data.Title}
+            />
             {/* {dodaj lub usuń do watchlist} */}
             {addedToWatchlist ? (
               <Button onClick={removeFromWatchlistHandler}>

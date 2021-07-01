@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BiSearchAlt } from "react-icons/bi";
 
 export const Container = styled.section`
   display: flex;
@@ -8,11 +9,10 @@ export const Container = styled.section`
   height: 100vh;
 `;
 
-//! dodaj czerwony kolor do status not found color + ternary
-export const Status = styled.p`
+export const Status = styled.p<{ error?: boolean }>`
   margin: 75px 0 5px 0;
   font-size: 12px;
-  color: var(--color-dark-blue);
+  color: ${({ error }) => (error ? "red" : "var(--color-dark-blue)")};
 `;
 
 export const Form = styled.form`
@@ -25,12 +25,12 @@ export const Form = styled.form`
 
 export const Input = styled.input<{ inputWidth: number }>`
   padding: 8px;
-  border-radius: 10px;
+  border-radius: 5px;
   outline: none;
   border: none;
   width: ${(props) => `${props.inputWidth}px`};
   margin: 0 10px;
-  color: var(--color-blue);
+  color: var(--color-dark-blue);
   transition: all 0.3s ease;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
@@ -40,11 +40,18 @@ export const Input = styled.input<{ inputWidth: number }>`
   &::placeholder {
     color: var(--color-blue);
   }
+
+  // usuń strzałki z input type number
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const Select = styled.select<{ inputWidth: number }>`
   padding: 9px;
-  border-radius: 10px;
+  border-radius: 5px;
   outline: none;
   border: none;
   margin: 0 5px;
@@ -58,11 +65,13 @@ export const Button = styled.button`
   border-radius: 10px;
   border: none;
   outline: none;
-  margin-left: 5px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--color-dark-blue);
   color: var(--color-gold);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-
   &:hover {
     transform: translateY(-3px);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
@@ -77,4 +86,9 @@ export const Button = styled.button`
 
 export const ResultsContainer = styled.div`
   width: 100%;
+`;
+
+export const SearchIcon = styled(BiSearchAlt)`
+  font-size: 16px;
+  margin-left: 2px;
 `;
