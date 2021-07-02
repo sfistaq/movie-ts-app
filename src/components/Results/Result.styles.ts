@@ -56,6 +56,8 @@ export const Description = styled.div`
   font-size: 14px;
   text-align: center;
 `;
+
+//TODO status gdy jest na liście
 export const Status = styled.span<{ top: string; color: string }>`
   position: absolute;
   width: 70px;

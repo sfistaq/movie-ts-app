@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { useLocation } from "react-router-dom";
-import { FavouriteContext } from "../../store/FavouriteState";
+// import { useLocation } from "react-router-dom";
+// import { FavouriteContext } from "../../store/FavouriteState";
 
 import {
   Container,
@@ -38,8 +38,8 @@ interface Props {
 }
 
 const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
-  const { watchlist, watched } = useContext(FavouriteContext);
-  const location = useLocation();
+  // const { watchlist, watched } = useContext(FavouriteContext);
+  // const location = useLocation();
 
   const searchResultsLength = +data.totalResults;
   const pagesNumber =
@@ -50,18 +50,12 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
       <ResultsItems>
         {data.Search.map((item, index) => (
           <Card key={item.imdbID} to={`/details/${item.imdbID}`}>
-            {/* {watchlist[index]?.imdbID === item.imdbID &&
-              location.pathname === "/" && (
-                <Status top="10" color={"#f05454"}>
-                  @WATCHLIST
-                </Status>
-              )}
-            {watched[index]?.imdbID === item.imdbID &&
+            {/* {watched[index]?.imdbID === item.imdbID &&
               location.pathname === "/" && (
                 <Status top="50" color={"#f05454"}>
                   @WATCHED
                 </Status>
-              )} */}
+              )}  */}
             <Image
               onClick={() => console.log(item)}
               src={item.Poster === "N/A" ? blankPosterImage : item.Poster}
