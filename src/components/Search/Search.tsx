@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { SearchContext } from "../../store/SearchState";
+import { SearchContext } from "../../store/Search/SearchState";
 import { useQuery } from "react-query";
 
 import Results from "../Results/Results";
@@ -40,17 +40,14 @@ const Search: React.FC = () => {
     setTypeHandler,
   } = useContext(SearchContext);
 
-  //! state
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchYear, setSearchYear] = useState<string>("");
 
-  //! query
   const { data, status } = useQuery(
     ["movies", page, title, year, searchType],
     () => searchMovie(page, title, year, searchType)
   );
 
-  //! submit
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setTitleHandler(searchTitle);
@@ -58,14 +55,13 @@ const Search: React.FC = () => {
     setPageHandler(1);
   };
 
-  //! change
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
     setTypeHandler(event.currentTarget.value);
     setPageHandler(1);
   };
 
-  // treśc wyszukiwania zostaje w input po rerender
+  // treść wyszukiwania zostaje w inputach po rerenderze
   useEffect(() => {
     setSearchTitle(title);
     setSearchYear(`${year}`);
@@ -97,13 +93,13 @@ const Search: React.FC = () => {
           type="text"
           placeholder={`${searchType} title`}
           value={searchTitle}
-          inputWidth={200}
+          inputWidth={180}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTitle(event.target.value)
           }
         />
         <Input
-          inputWidth={70}
+          inputWidth={60}
           type="number"
           placeholder="year"
           min={1888}

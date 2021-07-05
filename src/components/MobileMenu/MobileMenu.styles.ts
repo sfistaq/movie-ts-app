@@ -20,7 +20,7 @@ export const Container = styled.div<{ active: boolean }>`
 export const LinksContainer = styled.ul`
   width: 80%;
   list-style: none;
-  font-size: 45px;
+  font-size: 30px;
   font-weight: 300;
   color: var(--color-white);
   display: flex;
@@ -31,6 +31,7 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   color: var(--color-gold);
   margin-bottom: 30px;
+  text-transform: capitalize;
   &:hover {
     color: lightgoldenrodyellow;
   }

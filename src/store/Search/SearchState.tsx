@@ -1,16 +1,6 @@
 import React, { createContext, useReducer } from "react";
+import { SearchTypes } from "../types";
 import searchReducer from "./SearchReducer";
-
-interface SearchTypes {
-  title: string;
-  year: string;
-  page: number;
-  searchType: string;
-  setTitleHandler: (title: string) => void;
-  setYearHandler: (year: string) => void;
-  setPageHandler: (page: number) => void;
-  setTypeHandler: (type: string) => void;
-}
 
 const initState: SearchTypes = {
   title: "",

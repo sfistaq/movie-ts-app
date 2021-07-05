@@ -1,20 +1,9 @@
-interface MovieReducerTypes {
-  title: string;
-  year: string;
-  page: number;
-  searchType: string;
-}
-
-type Action =
-  | { type: "SET_TITLE"; title: string }
-  | { type: "SET_YEAR"; year: string }
-  | { type: "SET_PAGE"; page: number }
-  | { type: "SET_TYPE"; searchType: string };
+import { SearchReducer, SearchActions } from "../types";
 
 const movieReducer = (
-  state: MovieReducerTypes,
-  action: Action
-): MovieReducerTypes => {
+  state: SearchReducer,
+  action: SearchActions
+): SearchReducer => {
   switch (action.type) {
     case "SET_TITLE":
       return {

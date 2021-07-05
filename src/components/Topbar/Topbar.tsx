@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { data } from "./data";
 import { useLocation } from "react-router-dom";
-import { FavouriteContext } from "../../store/FavouriteState";
+import { FavContext } from "../../store/Favourite/FavState";
 
 import {
   Container,
@@ -28,9 +28,10 @@ const Topbar: React.FC<Props> = ({
   closeMobileMenu,
 }) => {
   const location = useLocation();
-  const { watchlist, watched } = useContext(FavouriteContext);
+  const { watchlist, watched } = useContext(FavContext);
 
-  console.log(location.pathname.slice(1));
+  const checkLocation: boolean =
+    location.pathname === "/watchlist" || location.pathname === "/watched";
 
   return (
     <Container>
@@ -55,7 +56,8 @@ const Topbar: React.FC<Props> = ({
           ))}
         </LinksContainer>
       )}
-      {windowWidth < 768 && !menuOpen && (
+
+      {windowWidth < 768 && !menuOpen && checkLocation && (
         <Title>{location.pathname.slice(1)}</Title>
       )}
       {menuOpen ? (

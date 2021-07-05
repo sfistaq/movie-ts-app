@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100%;
   background: var(--color-light-blue);
-  color: #000;
 `;
 
 export const Wrapper = styled.div`
@@ -19,16 +18,27 @@ export const Left = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 `;
 
 export const Image = styled.img`
-  margin-top: 50px;
+  margin: 20px;
   border-radius: 5px;
   border: 3px solid white;
   object-fit: fill;
+  height: 380px;
+  width: 290px;
+
+  @media screen and (max-width: 1200px) {
+    height: 350px;
+    width: 250px;
+  }
+  @media screen and (max-width: 768px) {
+    height: 300px;
+    width: 200px;
+  } ;
 `;
 
-// wyexportuj do pojedycznego komponentu bo sie powtarza ;)
 export const Button = styled.button`
   margin-top: 20px;
   width: 200px;
@@ -54,14 +64,33 @@ export const Button = styled.button`
 `;
 
 export const Right = styled.div`
+  height: 80%;
   flex: 0.7;
+  color: var(--color-dark-blue);
+  padding: 60px 20px;
+
+  @media screen and (max-width: 768px) {
+    padding: 80px 20px;
+  }
 
   h2 {
     font-size: 40px;
+    @media screen and (max-width: 1200px) {
+      font-size: 30px;
+    }
+    @media screen and (max-width: 768px) {
+      font-size: 25px;
+    }
   }
 
   p {
     font-size: 18px;
     margin: 8px 0;
+    @media screen and (max-width: 1200px) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: 768px) {
+      font-size: 15px;
+    }
   }
 `;

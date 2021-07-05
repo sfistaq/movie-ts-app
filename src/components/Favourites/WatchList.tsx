@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { FavouriteContext } from "../../store/FavouriteState";
-import { SearchContext } from "../../store/SearchState";
+import { FavContext } from "../../store/Favourite/FavState";
+import { SearchContext } from "../../store/Search/SearchState";
 
 import Results from "../Results/Results";
 
 import { Container, Status, ResultsContainer } from "./Favourites.styles";
 
 const WatchList: React.FC = () => {
-  const { watchlist } = useContext(FavouriteContext);
+  const { watchlist } = useContext(FavContext);
   const { page, setPageHandler } = useContext(SearchContext);
 
   const data = {
@@ -16,7 +16,6 @@ const WatchList: React.FC = () => {
     totalResults: watchlist.length.toString(),
   };
 
-  //TODO pagniacja po 10ciu
   return (
     <Container>
       {data.Response === "empty" ? (

@@ -75,6 +75,6 @@ export const CloseIcon = styled(FaTimes)`
 export const Title = styled.div`
   color: var(--color-gold);
   list-style: none;
-  font-size: 30px;
+  font-size: 20px;
   text-transform: capitalize;
 `;

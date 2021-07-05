@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Global from "./styles/global";
-import SearchState from "./store/SearchState";
-import FavouriteState from "./store/FavouriteState";
+import SearchState from "./store/Search/SearchState";
+import FavState from "./store/Favourite/FavState";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+//import { ReactQueryDevtools } from "react-query/devtools";
 
 import Topbar from "./components/Topbar/Topbar";
 import MobileMenu from "./components/MobileMenu/MobileMenu";
@@ -48,36 +47,31 @@ function App() {
   }, [windowWidth]);
 
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Global />
-          <SearchState>
-            <FavouriteState>
-              <Topbar
-                menuOpen={menuOpen}
-                menuOpenHanler={menuOpenHanler}
-                closeMobileMenu={closeMobileMenu}
-                windowWidth={windowWidth}
-              />
-              <MobileMenu
-                menuOpen={menuOpen}
-                closeMobileMenu={closeMobileMenu}
-              />
-              <Switch>
-                <Route path="/" exact component={Search} />
-                <Route path="/details/:id" component={Details} />
-                <Route path="/watchlist" component={WatchList} />
-                <Route path="/watched" component={Watched} />
-                <Redirect to="/" />
-              </Switch>
-            </FavouriteState>
-          </SearchState>
-        </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Global />
+        <SearchState>
+          <FavState>
+            <Topbar
+              menuOpen={menuOpen}
+              menuOpenHanler={menuOpenHanler}
+              closeMobileMenu={closeMobileMenu}
+              windowWidth={windowWidth}
+            />
+            <MobileMenu menuOpen={menuOpen} closeMobileMenu={closeMobileMenu} />
+            <Switch>
+              <Route path="/" exact component={Search} />
+              <Route path="/details/:id" component={Details} />
+              <Route path="/watchlist" component={WatchList} />
+              <Route path="/watched" component={Watched} />
+              <Redirect to="/" />
+            </Switch>
+          </FavState>
+        </SearchState>
+      </BrowserRouter>
 
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </>
+      {/* <ReactQueryDevtools initialIsOpen={false}  /> */}
+    </QueryClientProvider>
   );
 }
 

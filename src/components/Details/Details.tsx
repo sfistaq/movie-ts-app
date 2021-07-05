@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { FavouriteContext } from "../../store/FavouriteState";
+import { FavContext } from "../../store/Favourite/FavState";
 import {
   Container,
   Wrapper,
@@ -28,6 +28,8 @@ interface ParamTypes {
 
 const Details: React.FC = () => {
   const { id } = useParams<ParamTypes>(); // params z linku z routera
+  const { data } = useQuery(["details", id], () => detailsQuery(id));
+
   const {
     watchlist,
     watched,
@@ -36,11 +38,8 @@ const Details: React.FC = () => {
     addToWatched,
     removeFromWatched,
     moveToWatched,
-  } = useContext(FavouriteContext);
+  } = useContext(FavContext);
   const history = useHistory();
-
-  //! query
-  const { data } = useQuery(["details", id], () => detailsQuery(id));
 
   const addToWatchlistHandler = () => {
     addToWatchlist(data);
@@ -83,9 +82,6 @@ const Details: React.FC = () => {
       addedToWatched = true;
     }
   }
-
-  // element moze byc na liscie watchlist i watched
-  // element z watchlist mozna przenieśc do watched
 
   return (
     <Container>

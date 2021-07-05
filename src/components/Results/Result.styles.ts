@@ -16,6 +16,17 @@ export const ResultsItems = styled.div`
   grid-gap: 20px;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
+
+  @media screen and (max-width: 1050px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media screen and (max-width: 860px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 630px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const Card = styled(Link)`
@@ -57,20 +68,6 @@ export const Description = styled.div`
   text-align: center;
 `;
 
-//TODO status gdy jest na liście
-export const Status = styled.span<{ top: string; color: string }>`
-  position: absolute;
-  width: 70px;
-  top: ${(props) => `${props.top}px`};
-  left: 5px;
-  padding: 5px 10px;
-  background: ${(props) => `${props.color}`};
-  color: #fff;
-  font-weight: 500;
-  font-size: 10px;
-  border: 2px solid white;
-`;
-
 export const ButtonsContainer = styled.div`
   width: 100%;
   margin: 10px auto;
@@ -79,7 +76,6 @@ export const ButtonsContainer = styled.div`
   justify-content: center;
 `;
 
-//przenieś do global bo jest taki sam jak w search
 export const Button = styled.button`
   width: 80px;
   border-radius: 5px;

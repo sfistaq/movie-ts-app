@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { FavouriteContext } from "../../store/FavouriteState";
-import { SearchContext } from "../../store/SearchState";
+import { FavContext } from "../../store/Favourite/FavState";
+import { SearchContext } from "../../store/Search/SearchState";
 
 import Results from "../Results/Results";
 
 import { Container, Status, ResultsContainer } from "./Favourites.styles";
 
 const Watched: React.FC = () => {
-  const { watched } = useContext(FavouriteContext);
+  const { watched } = useContext(FavContext);
   const { page, setPageHandler } = useContext(SearchContext);
 
   const data = {
