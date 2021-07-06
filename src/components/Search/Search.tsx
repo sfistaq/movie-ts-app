@@ -16,6 +16,8 @@ import {
   ResultsContainer,
 } from "./Search.styles";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 const searchMovie = async (
   page: number,
   title: string,
@@ -23,7 +25,7 @@ const searchMovie = async (
   type: string
 ) => {
   const response = await fetch(
-    `https://www.omdbapi.com/?s=${title}&page=${page}&y=${year}&type=${type}&apikey=ba1bc38c`
+    `https://www.omdbapi.com/?s=${title}&page=${page}&y=${year}&type=${type}&apikey=${API_KEY}`
   );
   return response.json();
 };
@@ -57,6 +59,9 @@ const Search: React.FC = () => {
 
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
+    if (!searchTitle) {
+      setTitleHandler("");
+    }
     setTypeHandler(event.currentTarget.value);
     setPageHandler(1);
   };
@@ -64,7 +69,7 @@ const Search: React.FC = () => {
   // treść wyszukiwania zostaje w inputach po rerenderze
   useEffect(() => {
     setSearchTitle(title);
-    setSearchYear(`${year}`);
+    setSearchYear(year);
   }, [title, year]);
 
   return (

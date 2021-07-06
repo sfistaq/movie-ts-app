@@ -10,6 +10,10 @@ export const Wrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 501px) {
+    flex-direction: column;
+  }
 `;
 
 export const Left = styled.div`
@@ -36,7 +40,10 @@ export const Image = styled.img`
   @media screen and (max-width: 768px) {
     height: 300px;
     width: 200px;
-  } ;
+  }
+  @media screen and (max-width: 501px) {
+    margin-top: 40px;
+  }
 `;
 
 export const Button = styled.button`
@@ -80,6 +87,9 @@ export const Right = styled.div`
     }
     @media screen and (max-width: 768px) {
       font-size: 25px;
+    }
+    @media screen and (max-width: 501px) {
+      text-align: center;
     }
   }
 

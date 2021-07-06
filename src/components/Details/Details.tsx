@@ -14,9 +14,11 @@ import {
 
 import blankPosterImage from "../../images/blank-poster.jpeg";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 const detailsQuery = async (id: string) => {
   const response = await fetch(
-    `https://www.omdbapi.com/?i=${id}&plot=full&apikey=ba1bc38c`
+    `http://www.omdbapi.com/?i=${id}&plot=full&apikey=${API_KEY}`
   );
 
   return response.json();
