@@ -70,8 +70,6 @@ const Search: React.FC = () => {
     setSearchYear(year);
   }, [title, year]);
 
-  console.log(typeof year);
-
   return (
     <Container>
       {status === "loading" && <Status>Loading...</Status>}
