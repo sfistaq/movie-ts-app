@@ -16,7 +16,7 @@ import blankPosterImage from "../../images/blank-poster.jpeg";
 
 const detailsQuery = async (id: string) => {
   const response = await fetch(
-    `http://www.omdbapi.com/?i=${id}&plot=full&apikey=ba1bc38c`
+    `https://www.omdbapi.com/?i=${id}&plot=full&apikey=ba1bc38c`
   );
 
   return response.json();
