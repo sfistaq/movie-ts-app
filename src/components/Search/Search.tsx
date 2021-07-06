@@ -16,9 +16,6 @@ import {
   ResultsContainer,
 } from "./Search.styles";
 
-// TODO nie działa w netlify
-//const API_KEY = process.env.REACT_APP_API_KEY;
-
 const searchMovie = async (
   page: number,
   title: string,
@@ -72,6 +69,8 @@ const Search: React.FC = () => {
     setSearchTitle(title);
     setSearchYear(year);
   }, [title, year]);
+
+  console.log(typeof year);
 
   return (
     <Container>
