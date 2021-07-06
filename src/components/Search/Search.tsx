@@ -16,6 +16,9 @@ import {
   ResultsContainer,
 } from "./Search.styles";
 
+//TODO nie działa w Netlify :(
+//const API_KEY = process.env.REACT_APP_API_KEY;
+
 const searchMovie = async (
   page: number,
   title: string,
