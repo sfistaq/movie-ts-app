@@ -1,6 +1,6 @@
 ---
-screenshoot1: ./src/images/screenshoot1.png
-screenshoot2: ./src/images/screenshoot2.png
+screenshoot1: "./src/images/screenshoot1.png"
+screenshoot2: "./src/images/screenshoot2.png"
 ---
 
 # REACT MOVIE SEARCH APP with OMDB API
