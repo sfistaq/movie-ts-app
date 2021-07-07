@@ -8,6 +8,7 @@ import {
   MovieIcon,
   LinksContainer,
   LinkItem,
+  Link,
   ItemCount,
   MenuIcon,
   CloseIcon,
@@ -39,19 +40,19 @@ const Topbar: React.FC<Props> = ({
       {windowWidth > 768 && (
         <LinksContainer>
           {data.map((item) => (
-            <LinkItem
-              key={item.id}
-              to={item.link}
-              active={(location.pathname === item.link).toString()}
-            >
-              {item.text}
-
-              {item.text === "watchlist" && watchlist.length > 0 && (
-                <ItemCount>{watchlist.length}</ItemCount>
-              )}
-              {item.text === "watched" && watched.length > 0 && (
-                <ItemCount>{watched.length}</ItemCount>
-              )}
+            <LinkItem key={item.id}>
+              <Link
+                to={item.link}
+                active={(location.pathname === item.link).toString()}
+              >
+                {item.text}
+                {item.text === "watchlist" && watchlist.length > 0 && (
+                  <ItemCount>{watchlist.length}</ItemCount>
+                )}
+                {item.text === "watched" && watched.length > 0 && (
+                  <ItemCount>{watched.length}</ItemCount>
+                )}
+              </Link>
             </LinkItem>
           ))}
         </LinksContainer>

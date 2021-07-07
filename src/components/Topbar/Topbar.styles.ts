@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { BiCameraMovie } from "react-icons/bi";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -28,7 +28,11 @@ export const LinksContainer = styled.ul`
   list-style: none;
 `;
 
-export const LinkItem = styled(Link)<{ active: string }>`
+export const LinkItem = styled.li`
+ 
+`;
+
+export const Link = styled(RouterLink)<{ active: string }>`
   font-size: 20px;
   text-transform: capitalize;
   margin: 0 20px;

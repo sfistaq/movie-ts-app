@@ -16,8 +16,9 @@ import {
   ResultsContainer,
 } from "./Search.styles";
 
-//TODO nie działa w Netlify :(
-//const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+console.log(API_KEY);
 
 const searchMovie = async (
   page: number,
@@ -26,7 +27,7 @@ const searchMovie = async (
   type: string
 ) => {
   const response = await fetch(
-    `https://www.omdbapi.com/?s=${title}&page=${page}&y=${year}&type=${type}&apikey=ba1bc38c`
+    `https://www.omdbapi.com/?s=${title}&page=${page}&y=${year}&type=${type}&apikey=${API_KEY}`
   );
   return response.json();
 };

@@ -1,4 +1,4 @@
-export interface Response {
+export interface MovieDataResponse {
   Poster: string;
   Title: string;
   Type: string;
@@ -8,6 +8,6 @@ export interface Response {
 
 export interface Data {
   Response: string;
-  Search: Response[];
+  Search: MovieDataResponse[];
   totalResults: string;
 }
