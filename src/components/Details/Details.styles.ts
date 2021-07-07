@@ -4,14 +4,20 @@ export const Container = styled.section`
   height: calc(100vh - 70px);
   width: 100%;
   background: var(--color-light-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   @media screen and (max-width: 501px) {
+    margin-top: 350px;
     flex-direction: column;
   }
 `;
@@ -103,4 +109,9 @@ export const Right = styled.div`
       font-size: 15px;
     }
   }
+`;
+
+export const Error = styled.div`
+  color: red;
+  font-size: 25px;
 `;

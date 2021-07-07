@@ -3,6 +3,7 @@ import { SearchContext } from "../../store/Search/SearchState";
 import { useQuery } from "react-query";
 
 import Results from "../Results/Results";
+import { Spinner } from "../Spinner/Spinner";
 
 import {
   Container,
@@ -89,7 +90,11 @@ const Search: React.FC = () => {
         </Status>
       )}
 
-      <Form onSubmit={(event) => handleSubmit(event)}>
+      <Form
+        onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
+          handleSubmit(event)
+        }
+      >
         <Input
           autoFocus
           minLength={3}
@@ -135,6 +140,7 @@ const Search: React.FC = () => {
             buttons={true}
           />
         )}
+        {status === "loading" && <Spinner />}
       </ResultsContainer>
     </Container>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Global from "./styles/global";
 import SearchState from "./store/Search/SearchState";
 import FavState from "./store/Favourite/FavState";

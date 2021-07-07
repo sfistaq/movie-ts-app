@@ -86,6 +86,10 @@ export const Button = styled.button`
 
 export const ResultsContainer = styled.div`
   width: 100%;
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SearchIcon = styled(BiSearchAlt)`
