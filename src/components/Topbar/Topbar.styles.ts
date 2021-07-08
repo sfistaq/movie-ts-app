@@ -28,9 +28,7 @@ export const LinksContainer = styled.ul`
   list-style: none;
 `;
 
-export const LinkItem = styled.li`
- 
-`;
+export const LinkItem = styled.li``;
 
 export const Link = styled(RouterLink)<{ active: string }>`
   font-size: 20px;

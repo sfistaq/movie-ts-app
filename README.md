@@ -1,9 +1,9 @@
-# REACT MOVIE SEARCH APP with OMDB API
+# React Movie Search APP with OMDB API
 
 ## Build using
 
 - React
-- TypeScritpt
+- TypeScript
 - React Router
 - OMDB API
 - React Query
