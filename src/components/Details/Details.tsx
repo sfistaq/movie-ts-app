@@ -30,7 +30,7 @@ interface ParamTypes {
 }
 
 const Details: React.FC = () => {
-  const { id } = useParams<ParamTypes>(); // params z linku z routera
+  const { id } = useParams<ParamTypes>(); // params z linku routera
   const { data, error, status } = useQuery(["details", id], () =>
     detailsQuery(id)
   );

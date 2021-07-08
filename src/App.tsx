@@ -33,7 +33,7 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize); // przy resize uzyj handleResize
+    window.addEventListener("resize", handleResize); // resize => handleResize
     return () => {
       window.removeEventListener("resize", handleResize); // cleaning
     };
