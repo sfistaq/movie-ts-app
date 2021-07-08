@@ -27,7 +27,7 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
   return (
     <Container>
       <ResultsItems>
-        {data.Search.map((item, index) => (
+        {data.Search.map((item) => (
           <Card key={item.imdbID} to={`/details/${item.imdbID}`}>
             <Image
               src={item.Poster === "N/A" ? blankPosterImage : item.Poster}
