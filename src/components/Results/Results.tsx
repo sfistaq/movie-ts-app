@@ -1,4 +1,4 @@
-import { Data } from "./types";
+import { Data, MovieDataResponse } from "../../types/types";
 import {
   Container,
   ResultsItems,
@@ -9,13 +9,12 @@ import {
   Button,
   Pages,
 } from "./Result.styles";
-
-import blankPosterImage from "../../images/blank-poster.jpeg";
+import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 
 interface Props {
   data: Data;
   page: number;
-  setPage: (num: number) => void;
+  setPage: (page: number) => void;
   buttons: boolean;
 }
 
@@ -27,7 +26,7 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
   return (
     <Container>
       <ResultsItems>
-        {data.Search.map((item) => (
+        {data.Search.map((item: MovieDataResponse) => (
           <Card key={item.imdbID} to={`/details/${item.imdbID}`}>
             <Image
               src={item.Poster === "N/A" ? blankPosterImage : item.Poster}

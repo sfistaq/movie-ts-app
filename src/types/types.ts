@@ -76,3 +76,27 @@ export type SearchActions =
   | { type: "SET_YEAR"; year: string }
   | { type: "SET_PAGE"; page: number }
   | { type: "SET_TYPE"; searchType: string };
+
+export interface TopBarData {
+  id: number;
+  text: string;
+  link: string;
+}
+
+export interface MovieDataResponse {
+  Poster: string;
+  Title: string;
+  Type: string;
+  Year: string;
+  imdbID: string;
+}
+
+export interface Data {
+  Response: string;
+  Search: MovieDataResponse[];
+  totalResults: string;
+}
+
+export interface ParamTypes {
+  id: string;
+}

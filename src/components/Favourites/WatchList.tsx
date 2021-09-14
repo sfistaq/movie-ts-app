@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { FavContext } from "../../store/Favourite/FavState";
 import { SearchContext } from "../../store/Search/SearchState";
-
 import Results from "../Results/Results";
-
 import { Container, Status, ResultsContainer } from "./Favourites.styles";
 
 const WatchList: React.FC = () => {

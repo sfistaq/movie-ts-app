@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
+import { apiRequest } from "../../api/apiRequest";
 import { SearchContext } from "../../store/Search/SearchState";
 import { useQuery } from "react-query";
-
 import Results from "../Results/Results";
 import { Spinner } from "../Spinner/Spinner";
-
 import {
   Container,
   Status,
@@ -16,20 +15,6 @@ import {
   SearchIcon,
   ResultsContainer,
 } from "./Search.styles";
-
-const API_KEY = process.env.REACT_APP_API_KEY;
-
-const searchMovie = async (
-  page: number,
-  title: string,
-  year: string,
-  type: string
-) => {
-  const response = await fetch(
-    `https://www.omdbapi.com/?s=${title}&page=${page}&y=${year}&type=${type}&apikey=${API_KEY}`
-  );
-  return response.json();
-};
 
 const Search: React.FC = () => {
   const {
@@ -48,7 +33,7 @@ const Search: React.FC = () => {
 
   const { data, status } = useQuery(
     ["movies", page, title, year, searchType],
-    () => searchMovie(page, title, year, searchType)
+    () => apiRequest(`s=${title}&page=${page}&y=${year}&type=${searchType}`)
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +52,6 @@ const Search: React.FC = () => {
     setPageHandler(1);
   };
 
-  // treść wyszukiwania zostaje w inputach po rerenderze
   useEffect(() => {
     setSearchTitle(title);
     setSearchYear(year);
@@ -125,7 +109,6 @@ const Search: React.FC = () => {
           <Option value="series">Series</Option>
           <Option value="game">Game</Option>
         </Select>
-
         <Button>
           Search
           <SearchIcon />

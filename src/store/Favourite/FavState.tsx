@@ -1,10 +1,12 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import { DataTypes, FavTypes } from "../types";
+import { DataTypes, FavTypes } from "../../types/types";
+import * as actionTypes from "../actionTypes";
 import favReducer from "./FavReducer";
 
-//TODO
 const watchlistStore: any = localStorage.getItem("watchlist");
 const watchedStore: any = localStorage.getItem("watched");
+
+console.log(typeof watchlistStore);
 
 const initState: FavTypes = {
   watchlist: localStorage.getItem("watchlist")
@@ -25,35 +27,35 @@ const FavState: React.FC = ({ children }) => {
 
   const addToWatchlist = (data: DataTypes) => {
     dispatch({
-      type: "ADD_TO_WATCHLIST",
+      type: actionTypes.ADD_TO_WATCHLIST,
       data: data,
     });
   };
 
   const removeFromWatchlist = (id: string) => {
     dispatch({
-      type: "REMOVE_FROM_WATCHLIST",
+      type: actionTypes.REMOVE_FROM_WATCHLIST,
       id: id,
     });
   };
 
   const addToWatched = (data: DataTypes) => {
     dispatch({
-      type: "ADD_TO_WATCHED",
+      type: actionTypes.ADD_TO_WATCHED,
       data: data,
     });
   };
 
   const removeFromWatched = (id: string) => {
     dispatch({
-      type: "REMOVE_FROM_WATCHED",
+      type: actionTypes.REMOVE_FROM_WATCHED,
       id: id,
     });
   };
 
   const moveToWatched = (data: DataTypes) => {
     dispatch({
-      type: "MOVE_TO_WATCHED",
+      type: actionTypes.MOVE_TO_WATCHED,
       data: data,
     });
   };

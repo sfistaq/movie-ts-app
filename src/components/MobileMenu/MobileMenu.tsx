@@ -1,19 +1,24 @@
 import React from "react";
 import { data } from "../Topbar/data";
+import { TopBarData } from "../../types/types";
 
 import { Container, LinksContainer, NavLink } from "./MobileMenu.styles";
 
 interface Props {
   menuOpen: boolean;
-  closeMobileMenu: () => void;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MobileMenu: React.FC<Props> = ({ menuOpen, closeMobileMenu }) => {
+const MobileMenu: React.FC<Props> = ({ menuOpen, setMenuOpen }) => {
   return (
     <Container active={menuOpen}>
       <LinksContainer>
-        {data.map((item) => (
-          <NavLink to={item.link} key={item.id} onClick={closeMobileMenu}>
+        {data.map((item: TopBarData) => (
+          <NavLink
+            to={item.link}
+            key={item.id}
+            onClick={() => setMenuOpen(false)}
+          >
             {item.text}
           </NavLink>
         ))}

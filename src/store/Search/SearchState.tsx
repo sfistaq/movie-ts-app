@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from "react";
-import { SearchTypes } from "../types";
+import { SearchTypes } from "../../types/types";
+import * as actionTypes from "../actionTypes";
 import searchReducer from "./SearchReducer";
 
 const initState: SearchTypes = {
@@ -20,28 +21,28 @@ const SearchState: React.FC = ({ children }) => {
 
   const setTitleHandler = (title: string) => {
     dispatch({
-      type: "SET_TITLE",
+      type: actionTypes.SET_TITLE,
       title: title,
     });
   };
 
   const setYearHandler = (year: string) => {
     dispatch({
-      type: "SET_YEAR",
+      type: actionTypes.SET_YEAR,
       year: year,
     });
   };
 
   const setPageHandler = (page: number) => {
     dispatch({
-      type: "SET_PAGE",
+      type: actionTypes.SET_PAGE,
       page: page,
     });
   };
 
   const setTypeHandler = (type: string) => {
     dispatch({
-      type: "SET_TYPE",
+      type: actionTypes.SET_TYPE,
       searchType: type,
     });
   };

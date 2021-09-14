@@ -1,26 +1,27 @@
-import { SearchReducer, SearchActions } from "../types";
+import { SearchReducer, SearchActions } from "../../types/types";
+import * as actionTypes from "../actionTypes";
 
 const movieReducer = (
   state: SearchReducer,
   action: SearchActions
 ): SearchReducer => {
   switch (action.type) {
-    case "SET_TITLE":
+    case actionTypes.SET_TITLE:
       return {
         ...state,
         title: action.title,
       };
-    case "SET_YEAR":
+    case actionTypes.SET_YEAR:
       return {
         ...state,
         year: action.year,
       };
-    case "SET_PAGE":
+    case actionTypes.SET_PAGE:
       return {
         ...state,
         page: action.page,
       };
-    case "SET_TYPE":
+    case actionTypes.SET_TYPE:
       return {
         ...state,
         searchType: action.searchType,

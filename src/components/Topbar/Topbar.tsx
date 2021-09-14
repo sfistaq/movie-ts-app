@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { data } from "./data";
-import { useLocation } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
+import { useLocation } from "react-router-dom";
+import { data } from "./data";
 
 import {
   Container,
@@ -18,16 +18,10 @@ import {
 interface Props {
   menuOpen: boolean;
   windowWidth: number;
-  menuOpenHanler: () => void;
-  closeMobileMenu: () => void;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Topbar: React.FC<Props> = ({
-  menuOpen,
-  windowWidth,
-  menuOpenHanler,
-  closeMobileMenu,
-}) => {
+const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
   const location = useLocation();
   const { watchlist, watched } = useContext(FavContext);
 
@@ -57,14 +51,13 @@ const Topbar: React.FC<Props> = ({
           ))}
         </LinksContainer>
       )}
-
       {windowWidth < 768 && !menuOpen && checkLocation && (
         <Title>{location.pathname.slice(1)}</Title>
       )}
       {menuOpen ? (
-        <CloseIcon onClick={closeMobileMenu} />
+        <CloseIcon onClick={() => setMenuOpen(false)} />
       ) : (
-        <MenuIcon onClick={menuOpenHanler} />
+        <MenuIcon onClick={() => setMenuOpen((prev: boolean) => !menuOpen)} />
       )}
     </Container>
   );

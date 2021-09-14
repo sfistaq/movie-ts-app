@@ -1,32 +1,37 @@
-import { FavReducer, FavActions } from "../types";
+import { FavReducer, FavActions, DataTypes } from "../../types/types";
+import * as actionTypes from "../actionTypes";
 
-const favReducer = (state: FavReducer, action: FavActions): FavReducer => {
+const favReducer = (state: FavReducer, action: FavActions) => {
   switch (action.type) {
-    case "ADD_TO_WATCHLIST":
+    case actionTypes.ADD_TO_WATCHLIST:
       return {
         ...state,
         watchlist: [action.data, ...state.watchlist],
       };
-    case "REMOVE_FROM_WATCHLIST":
+    case actionTypes.REMOVE_FROM_WATCHLIST:
       return {
         ...state,
-        watchlist: state.watchlist.filter((item) => item.imdbID !== action.id),
+        watchlist: state.watchlist.filter(
+          (item: DataTypes) => item.imdbID !== action.id
+        ),
       };
-    case "ADD_TO_WATCHED":
+    case actionTypes.ADD_TO_WATCHED:
       return {
         ...state,
         watched: [action.data, ...state.watched],
       };
-    case "REMOVE_FROM_WATCHED":
+    case actionTypes.REMOVE_FROM_WATCHED:
       return {
         ...state,
-        watched: state.watched.filter((item) => item.imdbID !== action.id),
+        watched: state.watched.filter(
+          (item: DataTypes) => item.imdbID !== action.id
+        ),
       };
-    case "MOVE_TO_WATCHED":
+    case actionTypes.MOVE_TO_WATCHED:
       return {
         ...state,
         watchlist: state.watchlist.filter(
-          (item) => item.imdbID !== action.data.imdbID
+          (item: DataTypes) => item.imdbID !== action.data.imdbID
         ),
         watched: [action.data, ...state.watched],
       };

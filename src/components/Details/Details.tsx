@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { apiRequest } from "../../api/apiRequest";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -12,27 +13,14 @@ import {
   Right,
   Error,
 } from "./Details.styles";
-
 import { Spinner } from "../Spinner/Spinner";
-import blankPosterImage from "../../images/blank-poster.jpeg";
-
-const API_KEY = process.env.REACT_APP_API_KEY;
-
-const detailsQuery = async (id: string) => {
-  const response = await fetch(
-    `https://www.omdbapi.com/?i=${id}&plot=full&apikey=${API_KEY}`
-  );
-  return response.json();
-};
-
-interface ParamTypes {
-  id: string;
-}
+import { ParamTypes } from "../../types/types";
+import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 
 const Details: React.FC = () => {
-  const { id } = useParams<ParamTypes>(); // params z linku routera
+  const { id } = useParams<ParamTypes>();
   const { data, error, status } = useQuery(["details", id], () =>
-    detailsQuery(id)
+    apiRequest(`i=${id}&plot=full`)
   );
 
   const {
@@ -100,7 +88,6 @@ const Details: React.FC = () => {
                 src={data.Poster === "N/A" ? blankPosterImage : data.Poster}
                 alt={data.Title}
               />
-              {/* {dodaj lub usuń do watchlist} */}
               {addedToWatchlist ? (
                 <Button onClick={removeFromWatchlistHandler}>
                   Remove From Watchlist
@@ -110,17 +97,14 @@ const Details: React.FC = () => {
                   Add To Watchlist {addedToWatched ? "Again" : null}
                 </Button>
               )}
-              {/* {jeeli dodane do watched = usuń z watched} */}
               {addedToWatched && (
                 <Button onClick={removeFromWatchedHandler}>
                   Remove From Watched
                 </Button>
               )}
-              {/* {jezeli nie ma w watched i watchlist to dodaj do watched} */}
               {!addedToWatched && !addedToWatchlist && (
                 <Button onClick={addToWatchedHandler}>Add To Watched</Button>
               )}
-              {/* {jezeli nie ma w watched a jest w watchlist to przenieś do watched} */}
               {!addedToWatched && addedToWatchlist && (
                 <Button onClick={moveToWatchedHandler}>Move To Watched</Button>
               )}
