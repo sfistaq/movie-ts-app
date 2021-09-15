@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import { FavContext } from "../../store/Favourite/FavState";
 import { SearchContext } from "../../store/Search/SearchState";
 import Results from "../Results/Results";
-import { Container, Status, ResultsContainer } from "./Favourites.styles";
+import { Container } from "../../styles/global";
+import Status from "../Status/Status";
+import Background from "../Background/Background";
+import watched_bg from "../../assets/images/watched_bg.svg";
 
 const Watched: React.FC = () => {
   const { watched } = useContext(FavContext);
@@ -17,21 +20,23 @@ const Watched: React.FC = () => {
   return (
     <Container>
       {data.Response === "empty" ? (
-        <Status>Add some watched movies</Status>
+        <Status text="Add some movies to watched list" />
       ) : (
-        <Status>
-          You watched {+data.totalResults}{" "}
-          {+data.totalResults <= 1 ? "title" : "titles"}
-        </Status>
+        <Status
+          text={`You watched ${+data.totalResults}
+        ${+data.totalResults <= 1 ? "title" : "titles"}`}
+        />
       )}
-      <ResultsContainer>
+      {watched.length === 0 ? (
+        <Background image={watched_bg} />
+      ) : (
         <Results
           data={data}
           page={page}
           setPage={setPageHandler}
           buttons={false}
         />
-      </ResultsContainer>
+      )}
     </Container>
   );
 };

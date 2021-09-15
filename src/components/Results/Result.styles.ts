@@ -30,21 +30,20 @@ export const ResultsItems = styled.div`
 `;
 
 export const Card = styled(Link)`
-  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--color-white);
   height: 280px;
   width: 190px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 5px;
-  border: 2px solid white;
+  color: var(--color-gray-dark);
+  border: 3px solid var(--color-white);
+  border-radius: var(--border-radius);
+  text-decoration: none;
   overflow: hidden;
   transition: all 0.3s ease;
-  text-decoration: none;
-  color: var(--color-dark-blue);
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
-
   &:hover {
     transform: scale(1.04);
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
@@ -56,15 +55,24 @@ export const Image = styled.img`
   min-height: 80%;
   min-width: 100%;
   object-fit: fill;
+  border: 3px solid var(--color-white);
+  border-radius: var(--border-radius);
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export const Description = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
+  font-weight: 500;
   text-align: center;
+  color: inherit;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -92,6 +100,7 @@ export const Button = styled.button`
 
 export const Pages = styled.span`
   margin: 0 10px;
-  color: var(--color-dark-blue);
-  font-weight: bold;
+  font-size: 20px;
+  color: var(--color-gray-dark);
+  font-weight: 500;
 `;

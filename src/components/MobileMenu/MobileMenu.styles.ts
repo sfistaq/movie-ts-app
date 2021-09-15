@@ -9,18 +9,20 @@ export const Container = styled.div<{ active: boolean }>`
   justify-content: center;
   width: 100vw;
   height: ${({ active }) => (active ? "100vh" : "0")};
+  top: ${({ active }) => (active ? "70" : "-100vh")};
   opacity: ${({ active }) => (active ? "100" : "0")};
   background-color: var(--background-nav);
   backdrop-filter: var(--background-blur);
   color: var(--color-white);
   z-index: 50;
-  transition: all 1s ease;
+  transition: all 0.6s ease-out;
 `;
 
 export const LinksContainer = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -35%;
 `;
 
 export const NavLink = styled(Link)`

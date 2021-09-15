@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { FavContext } from "../../store/Favourite/FavState";
 import { useLocation } from "react-router-dom";
 import { data } from "./data";
+import * as constants from "../../utils/constants";
 
 import {
   Container,
@@ -24,12 +25,10 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
   const location = useLocation();
   const { watchlist, watched } = useContext(FavContext);
 
-  console.log(location.pathname.slice(1));
-
   return (
     <Container>
       <MovieIcon />
-      {windowWidth > 768 && (
+      {windowWidth > constants.BREAKPOINT && (
         <LinksContainer>
           {data.map((item) => (
             <Link
@@ -48,7 +47,7 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
           ))}
         </LinksContainer>
       )}
-      {windowWidth < 768 && !menuOpen && (
+      {windowWidth < constants.BREAKPOINT && !menuOpen && (
         <Title>
           {location.pathname === "/" ? null : location.pathname.slice(1)}
         </Title>

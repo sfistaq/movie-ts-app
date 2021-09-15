@@ -1,14 +1,5 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
-  height: calc(100vh - 70px);
-  width: 100%;
-  background: var(--color-light-blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const Wrapper = styled.div`
   height: 100%;
   width: 100%;

@@ -6,9 +6,9 @@ import {
   Image,
   Description,
   ButtonsContainer,
-  Button,
   Pages,
 } from "./Result.styles";
+import Button from "../Button/Button";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 
 interface Props {
@@ -22,7 +22,6 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
   const searchResultsLength = +data.totalResults;
   const pagesNumber =
     searchResultsLength <= 10 ? 1 : Math.floor(+data.totalResults / 10) + 1;
-
   return (
     <Container>
       <ResultsItems>
@@ -38,21 +37,21 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
       </ResultsItems>
       {buttons && (
         <ButtonsContainer>
-          <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
-            PREV
-          </Button>
+          <div onClick={() => setPage(page - 1)}>
+            <Button text="PREV" disabled={page === 1}></Button>
+          </div>
           <Pages>
             {page} / {pagesNumber}
           </Pages>
-          <Button
-            disabled={
-              page === Math.floor(+data.totalResults / 10) + 1 ||
-              pagesNumber === 1
-            }
-            onClick={() => setPage(page + 1)}
-          >
-            NEXT
-          </Button>
+          <div onClick={() => setPage(page + 1)}>
+            <Button
+              text="NEXT"
+              disabled={
+                page === Math.floor(+data.totalResults / 10) + 1 ||
+                pagesNumber === 1
+              }
+            ></Button>
+          </div>
         </ButtonsContainer>
       )}
     </Container>

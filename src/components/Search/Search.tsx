@@ -4,18 +4,14 @@ import { SearchContext } from "../../store/Search/SearchState";
 import { useQuery } from "react-query";
 import Results from "../Results/Results";
 import { Spinner } from "../Spinner/Spinner";
-import {
-  Container,
-  Status,
-  Form,
-  Input,
-  Select,
-  Option,
-  Button,
-  SearchIcon,
-  ResultsContainer,
-} from "./Search.styles";
+import Status from "../Status/Status";
+import Button from "../Button/Button";
+import Background from "../Background/Background";
+import { Form, Input, Select, Option, ResultsContainer } from "./Search.styles";
+import { Container } from "../../styles/global";
 import * as constants from "../../utils/constants";
+import { BiSearchAlt } from "react-icons/bi";
+import search_bg from "../../assets/images/search_bg.svg";
 
 const Search: React.FC = () => {
   const {
@@ -32,7 +28,7 @@ const Search: React.FC = () => {
   const [searchTitle, setSearchTitle] = useState<string>("");
   const [searchYear, setSearchYear] = useState<string>("");
 
-  const { data, status } = useQuery(
+  const { data, status, isLoading } = useQuery(
     ["movies", page, title, year, searchType],
     () => apiRequest(`?s=${title}&page=${page}&y=${year}&type=${searchType}`)
   );
@@ -60,17 +56,17 @@ const Search: React.FC = () => {
 
   return (
     <Container>
-      {status === "loading" && <Status>Loading...</Status>}
-      {!title && <Status>Search some {searchType}...</Status>}
+      {status === "loading" && <Status text="Loading..." />}
+      {!title && !isLoading && <Status text={`Search some ${searchType}...`} />}
       {data && data.Error !== constants.ERROR && data.Response === "False" && (
-        <Status error>{searchType} not found!</Status>
+        <Status error text={`${searchType} not found !`} />
       )}
       {data && data.Response === "True" && (
-        <Status>
-          we are found {data.totalResults}&nbsp;
-          {searchType}
-          {searchType === "series" ? "" : "s"}
-        </Status>
+        <Status
+          text={` we are found ${data.totalResults}
+        ${searchType}
+       `}
+        />
       )}
 
       <Form
@@ -86,16 +82,18 @@ const Search: React.FC = () => {
           type="text"
           placeholder={`${searchType} title`}
           value={searchTitle}
-          inputWidth={180}
+          inputWidth={350}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTitle(event.target.value)
           }
         />
         <Input
-          inputWidth={60}
+          inputWidth={80}
           type="number"
           placeholder="year"
           min={1888}
+          maxLength={4}
+          minLength={4}
           value={searchYear}
           max={new Date().getFullYear()}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -108,10 +106,7 @@ const Search: React.FC = () => {
           <Option value="series">Series</Option>
           <Option value="game">Game</Option>
         </Select>
-        <Button>
-          Search
-          <SearchIcon />
-        </Button>
+        <Button text="search" icon={<BiSearchAlt />} />
       </Form>
       <ResultsContainer>
         {data && data.Response !== "False" && (
@@ -122,8 +117,11 @@ const Search: React.FC = () => {
             buttons={true}
           />
         )}
-        {status === "loading" && <Spinner />}
       </ResultsContainer>
+      {status === "loading" && <Spinner />}
+      {!data?.Search && status !== "loading" && (
+        <Background image={search_bg} />
+      )}
     </Container>
   );
 };

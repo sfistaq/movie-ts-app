@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Global from "./styles/global";
+import { GlobalStyle } from "./styles/global";
 import SearchState from "./store/Search/SearchState";
 import FavState from "./store/Favourite/FavState";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
@@ -11,6 +11,7 @@ import Search from "./components/Search/Search";
 import Details from "./components/Details/Details";
 import WatchList from "./components/Favourites/WatchList";
 import Watched from "./components/Favourites/Watched";
+import * as constants from "./utils/constants";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +31,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (windowWidth > 768) {
+    if (windowWidth > constants.BREAKPOINT) {
       setMenuOpen(false);
     }
   }, [windowWidth]);
@@ -38,7 +39,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Global />
+        <GlobalStyle />
         <SearchState>
           <FavState>
             <Topbar
@@ -47,6 +48,7 @@ function App() {
               windowWidth={windowWidth}
             />
             <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
             <Switch>
               <Route path="/" exact component={Search} />
               <Route path="/details/:id" component={Details} />

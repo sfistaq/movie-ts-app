@@ -3,19 +3,13 @@ import { apiRequest } from "../../api/apiRequest";
 import { useQuery } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
-import {
-  Container,
-  Wrapper,
-  Left,
-  Image,
-  Button,
-  Right,
-  Error,
-} from "./Details.styles";
+import { Wrapper, Left, Image, Right, Error } from "./Details.styles";
 import { Spinner } from "../Spinner/Spinner";
 import { ParamTypes, DataTypes } from "../../types/types";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 import * as constants from "../../utils/constants";
+import { Container } from "../../styles/global";
+import Button from "../Button/Button";
 
 const Details: React.FC = () => {
   const { id } = useParams<ParamTypes>();
@@ -77,24 +71,33 @@ const Details: React.FC = () => {
                 alt={data.Title}
               />
               {isInWatchlist ? (
-                <Button onClick={removeFromWatchlistHandler}>
-                  Remove From Watchlist
-                </Button>
+                <div onClick={removeFromWatchlistHandler}>
+                  <Button text="Remove From Watchlis" />
+                </div>
               ) : (
-                <Button onClick={addToWatchlistHandler}>
-                  Add To Watchlist {isInWatchedlist ? "Again" : null}
-                </Button>
+                <div onClick={addToWatchlistHandler}>
+                  <Button
+                    text={`  Add To Watchlist ${
+                      isInWatchedlist ? "Again" : null
+                    }`}
+                  />
+                </div>
               )}
               {isInWatchedlist && (
-                <Button onClick={removeFromWatchedHandler}>
-                  Remove From Watched
-                </Button>
+                <div onClick={removeFromWatchedHandler}>
+                  <Button text="Remove From Watched" />
+                </div>
               )}
               {!isInWatchedlist && !isInWatchlist && (
-                <Button onClick={addToWatchedHandler}>Add To Watched</Button>
+                <div onClick={addToWatchedHandler}>
+                  <Button text="Add To Watched" />
+                </div>
               )}
               {!isInWatchedlist && isInWatchlist && (
-                <Button onClick={moveToWatchedHandler}>Move To Watched</Button>
+                <div onClick={moveToWatchedHandler}>
+                  {" "}
+                  <Button text="Move To Watched" />
+                </div>
               )}
             </Left>
             <Right>

@@ -4,7 +4,7 @@ import { FiVideo } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 
 export const Container = styled.div`
-  position: fixed;
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -66,7 +66,7 @@ export const ItemCount = styled.span`
 const icon = css`
   display: none;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 630px) {
     display: block;
     font-size: 38px;
     color: inherit;
