@@ -2,37 +2,36 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div<{ active: boolean }>`
-  width: 300px;
-  right: ${({ active }) => (active ? "0" : "-300px")};
-  opacity: ${({ active }) => (active ? "100" : "0")};
-  height: 100vh;
-  background-color: var(--color-dark-blue);
   position: fixed;
-  top: 0;
-  z-index: 50;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: ${({ active }) => (active ? "100vh" : "0")};
+  opacity: ${({ active }) => (active ? "100" : "0")};
+  background-color: var(--background-nav);
+  backdrop-filter: var(--background-blur);
+  color: var(--color-white);
+  z-index: 50;
   transition: all 1s ease;
 `;
 
 export const LinksContainer = styled.ul`
-  width: 80%;
-  list-style: none;
-  font-size: 30px;
-  font-weight: 300;
-  color: var(--color-white);
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const NavLink = styled(Link)`
+  color: inherit;
   text-decoration: none;
-  color: var(--color-gold);
-  margin-bottom: 30px;
   text-transform: capitalize;
+  list-style: none;
+  font-size: 40px;
+  font-weight: 300;
+  margin: 40px 0;
   &:hover {
-    color: lightgoldenrodyellow;
+    color: var(--color-gray-light);
   }
 `;

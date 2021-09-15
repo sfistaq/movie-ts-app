@@ -37,12 +37,11 @@ export const Card = styled(Link)`
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
-  border: 3px solid white;
+  border: 2px solid white;
   overflow: hidden;
   transition: all 0.3s ease;
   text-decoration: none;
   color: var(--color-dark-blue);
-  background: white;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 

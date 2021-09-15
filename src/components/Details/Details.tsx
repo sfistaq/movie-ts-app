@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { apiRequest } from "../../api/apiRequest";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
 import {
   Container,
@@ -14,13 +13,14 @@ import {
   Error,
 } from "./Details.styles";
 import { Spinner } from "../Spinner/Spinner";
-import { ParamTypes } from "../../types/types";
+import { ParamTypes, DataTypes } from "../../types/types";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
+import * as constants from "../../utils/constants";
 
 const Details: React.FC = () => {
   const { id } = useParams<ParamTypes>();
   const { data, error, status } = useQuery(["details", id], () =>
-    apiRequest(`i=${id}&plot=full`)
+    apiRequest(`?i=${id}&plot=full`)
   );
 
   const {
@@ -59,53 +59,41 @@ const Details: React.FC = () => {
     history.push("/watched");
   };
 
-  //REFAKTOR
-  let addedToWatchlist: boolean = false;
-  if (data) {
-    const find = watchlist.find((item) => item.imdbID === data.imdbID);
-    if (find?.imdbID === data.imdbID) {
-      addedToWatchlist = true;
-    }
-  }
-
-  let addedToWatched: boolean = false;
-  if (data) {
-    const find = watched.find((item) => item.imdbID === data.imdbID);
-    if (find?.imdbID === data.imdbID) {
-      addedToWatched = true;
-    }
-  }
+  //prettier-ignore
+  const isInWatchlist = watchlist.some((item: DataTypes) => item?.imdbID === data?.imdbID);
+  //prettier-ignore
+  const isInWatchedlist = watched.some((item: DataTypes) => item?.imdbID === data?.imdbID);
 
   return (
     <Container>
       {data &&
         status !== "loading" &&
         !error &&
-        data?.Error !== "Incorrect IMDb ID." && (
+        data?.Error !== constants.ERROR && (
           <Wrapper>
             <Left>
               <Image
                 src={data.Poster === "N/A" ? blankPosterImage : data.Poster}
                 alt={data.Title}
               />
-              {addedToWatchlist ? (
+              {isInWatchlist ? (
                 <Button onClick={removeFromWatchlistHandler}>
                   Remove From Watchlist
                 </Button>
               ) : (
                 <Button onClick={addToWatchlistHandler}>
-                  Add To Watchlist {addedToWatched ? "Again" : null}
+                  Add To Watchlist {isInWatchedlist ? "Again" : null}
                 </Button>
               )}
-              {addedToWatched && (
+              {isInWatchedlist && (
                 <Button onClick={removeFromWatchedHandler}>
                   Remove From Watched
                 </Button>
               )}
-              {!addedToWatched && !addedToWatchlist && (
+              {!isInWatchedlist && !isInWatchlist && (
                 <Button onClick={addToWatchedHandler}>Add To Watched</Button>
               )}
-              {!addedToWatched && addedToWatchlist && (
+              {!isInWatchedlist && isInWatchlist && (
                 <Button onClick={moveToWatchedHandler}>Move To Watched</Button>
               )}
             </Left>
@@ -120,7 +108,7 @@ const Details: React.FC = () => {
           </Wrapper>
         )}
       {!data && status === "loading" && <Spinner />}
-      {data?.Error === "Incorrect IMDb ID." && (
+      {data?.Error === constants.ERROR && (
         <Error>Error, Incorrect IMDb ID.</Error>
       )}
     </Container>

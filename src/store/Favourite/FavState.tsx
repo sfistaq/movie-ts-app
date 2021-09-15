@@ -6,8 +6,6 @@ import favReducer from "./FavReducer";
 const watchlistStore: any = localStorage.getItem("watchlist");
 const watchedStore: any = localStorage.getItem("watched");
 
-console.log(typeof watchlistStore);
-
 const initState: FavTypes = {
   watchlist: localStorage.getItem("watchlist")
     ? JSON.parse(watchlistStore)

@@ -7,7 +7,6 @@ import {
   Container,
   MovieIcon,
   LinksContainer,
-  LinkItem,
   Link,
   ItemCount,
   MenuIcon,
@@ -25,8 +24,7 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
   const location = useLocation();
   const { watchlist, watched } = useContext(FavContext);
 
-  const checkLocation: boolean =
-    location.pathname === "/watchlist" || location.pathname === "/watched";
+  console.log(location.pathname.slice(1));
 
   return (
     <Container>
@@ -34,25 +32,26 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
       {windowWidth > 768 && (
         <LinksContainer>
           {data.map((item) => (
-            <LinkItem key={item.id}>
-              <Link
-                to={item.link}
-                active={(location.pathname === item.link).toString()}
-              >
-                {item.text}
-                {item.text === "watchlist" && watchlist.length > 0 && (
-                  <ItemCount>{watchlist.length}</ItemCount>
-                )}
-                {item.text === "watched" && watched.length > 0 && (
-                  <ItemCount>{watched.length}</ItemCount>
-                )}
-              </Link>
-            </LinkItem>
+            <Link
+              key={item.id}
+              to={item.link}
+              active={(location.pathname === item.link).toString()}
+            >
+              {item.text}
+              {item.text === "watchlist" && watchlist.length > 0 && (
+                <ItemCount>{watchlist.length}</ItemCount>
+              )}
+              {item.text === "watched" && watched.length > 0 && (
+                <ItemCount>{watched.length}</ItemCount>
+              )}
+            </Link>
           ))}
         </LinksContainer>
       )}
-      {windowWidth < 768 && !menuOpen && checkLocation && (
-        <Title>{location.pathname.slice(1)}</Title>
+      {windowWidth < 768 && !menuOpen && (
+        <Title>
+          {location.pathname === "/" ? null : location.pathname.slice(1)}
+        </Title>
       )}
       {menuOpen ? (
         <CloseIcon onClick={() => setMenuOpen(false)} />

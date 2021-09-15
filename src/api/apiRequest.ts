@@ -1,7 +1,7 @@
-import * as Constants from "../utils/constants";
+import * as constants from "../utils/constants";
 
 export const apiRequest = async (params: string) => {
   return (
-    await fetch(`${Constants.URL}/?${params}&apikey=${Constants.API_KEY}`)
+    await fetch(`${constants.URL}/${params}&apikey=${constants.API_KEY}`)
   ).json();
 };

@@ -15,6 +15,7 @@ import {
   SearchIcon,
   ResultsContainer,
 } from "./Search.styles";
+import * as constants from "../../utils/constants";
 
 const Search: React.FC = () => {
   const {
@@ -33,7 +34,7 @@ const Search: React.FC = () => {
 
   const { data, status } = useQuery(
     ["movies", page, title, year, searchType],
-    () => apiRequest(`s=${title}&page=${page}&y=${year}&type=${searchType}`)
+    () => apiRequest(`?s=${title}&page=${page}&y=${year}&type=${searchType}`)
   );
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -61,11 +62,9 @@ const Search: React.FC = () => {
     <Container>
       {status === "loading" && <Status>Loading...</Status>}
       {!title && <Status>Search some {searchType}...</Status>}
-      {data &&
-        data.Error !== "Incorrect IMDb ID." &&
-        data.Response === "False" && (
-          <Status error>{searchType} not found!</Status>
-        )}
+      {data && data.Error !== constants.ERROR && data.Response === "False" && (
+        <Status error>{searchType} not found!</Status>
+      )}
       {data && data.Response === "True" && (
         <Status>
           we are found {data.totalResults}&nbsp;
