@@ -5,7 +5,7 @@ export const Container = styled.div<{ image: string }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: ${(props) => `url(${props.image})`};
   background-repeat: no-repeat;
