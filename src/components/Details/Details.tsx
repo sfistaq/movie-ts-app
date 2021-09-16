@@ -5,10 +5,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
 import {
   Wrapper,
-  Left,
+  Poster,
   Image,
   ButtonsWrapper,
-  Right,
+  Description,
   Error,
 } from "./Details.styles";
 import { Spinner } from "../Spinner/Spinner";
@@ -17,6 +17,7 @@ import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 import * as constants from "../../utils/constants";
 import { Container } from "../../styles/global";
 import Button from "../Button/Button";
+import Status from "../Status/Status";
 
 const Details: React.FC = () => {
   const { id } = useParams<ParamTypes>();
@@ -72,7 +73,7 @@ const Details: React.FC = () => {
         !error &&
         data?.Error !== constants.ERROR && (
           <Wrapper>
-            <Left>
+            <Poster>
               <Image
                 src={data.Poster === "N/A" ? blankPosterImage : data.Poster}
                 alt={data.Title}
@@ -108,18 +109,31 @@ const Details: React.FC = () => {
                   </div>
                 )}
               </ButtonsWrapper>
-            </Left>
-            <Right>
+            </Poster>
+            <Description>
               <h2>{data.Title}</h2>
-              <p>year: {data.Year}</p>
-              <p>country: {data.Country}</p>
-              <p>director: {data.Director}</p>
-              <p>genre: {data.Genre}</p>
+              <p>
+                <strong>year:</strong> {data.Year}
+              </p>
+              <p>
+                <strong>country:</strong> {data.Country}
+              </p>
+              <p>
+                <strong>director:</strong> {data.Director}
+              </p>
+              <p>
+                <strong>genre:</strong> {data.Genre}
+              </p>
               <p>{data.Plot}</p>
-            </Right>
+            </Description>
           </Wrapper>
         )}
-      {!data && status === "loading" && <Spinner />}
+      {!data && status === "loading" && (
+        <div>
+          <Status text="Loading..." />
+          <Spinner />
+        </div>
+      )}
       {data?.Error === constants.ERROR && (
         <Error>Error, Incorrect IMDb ID.</Error>
       )}

@@ -17,6 +17,10 @@ export const TopbarContainer = styled.div`
   z-index: 100;
 `;
 
+export const IconLink = styled(RouterLink)`
+  color: inherit;
+`;
+
 export const MovieIcon = styled(FiVideo)`
   font-size: 48px;
   color: inherit;
@@ -54,14 +58,19 @@ export const Link = styled(RouterLink)<{ active: string }>`
 
 export const ItemCount = styled.span`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 4px;
   right: -24px;
-  padding: 7px 10px;
+  height: 25px;
+  width: 25px;
   border-radius: 50%;
   background-color: var(--color-red);
   color: var(--color-white);
-  font-size: 10px;
-  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
 `;
 
 const icon = css`

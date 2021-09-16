@@ -48,7 +48,6 @@ function App() {
               windowWidth={windowWidth}
             />
             <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-
             <Switch>
               <Route path="/" exact component={Search} />
               <Route path="/details/:id" component={Details} />

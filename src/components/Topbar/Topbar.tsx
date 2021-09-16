@@ -6,6 +6,7 @@ import * as constants from "../../utils/constants";
 
 import {
   TopbarContainer,
+  IconLink,
   MovieIcon,
   LinksContainer,
   Link,
@@ -25,9 +26,13 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
   const location = useLocation();
   const { watchlist, watched } = useContext(FavContext);
 
+  const navbarTitle = data.map((item) => item.link).includes(location.pathname);
+
   return (
     <TopbarContainer>
-      <MovieIcon />
+      <IconLink to="/">
+        <MovieIcon />
+      </IconLink>
       {windowWidth > constants.BREAKPOINT && (
         <LinksContainer>
           {data.map((item) => (
@@ -48,9 +53,7 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
         </LinksContainer>
       )}
       {windowWidth < constants.BREAKPOINT && !menuOpen && (
-        <Title>
-          {location.pathname === "/" ? null : location.pathname.slice(1)}
-        </Title>
+        <Title>{navbarTitle && location.pathname.slice(1)}</Title>
       )}
       {menuOpen ? (
         <CloseIcon onClick={() => setMenuOpen(false)} />

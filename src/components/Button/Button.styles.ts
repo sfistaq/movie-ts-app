@@ -30,4 +30,8 @@ export const CustomButton = styled.button<{ disabled: boolean }>`
     font-size: inherit;
     margin-left: 4px;
   }
+  @media screen and (max-width: 600px) {
+    padding: 12px;
+    font-size: 14px;
+  }
 `;
