@@ -7,7 +7,7 @@ import { Spinner } from "../Spinner/Spinner";
 import Status from "../Status/Status";
 import Button from "../Button/Button";
 import Background from "../Background/Background";
-import { Form, Input, Select, Option, ResultsContainer } from "./Search.styles";
+import { Form, Input, Select, Option } from "./Search.styles";
 import { Container } from "../../styles/global";
 import * as constants from "../../utils/constants";
 import { BiSearchAlt } from "react-icons/bi";
@@ -82,7 +82,7 @@ const Search: React.FC = () => {
           type="text"
           placeholder={`${searchType} title`}
           value={searchTitle}
-          inputWidth={350}
+          inputWidth={300}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setSearchTitle(event.target.value)
           }
@@ -108,16 +108,16 @@ const Search: React.FC = () => {
         </Select>
         <Button text="search" icon={<BiSearchAlt />} />
       </Form>
-      <ResultsContainer>
-        {data && data.Response !== "False" && (
-          <Results
-            data={data}
-            page={page}
-            setPage={setPageHandler}
-            buttons={true}
-          />
-        )}
-      </ResultsContainer>
+
+      {data && data.Response !== "False" && (
+        <Results
+          data={data}
+          page={page}
+          setPage={setPageHandler}
+          buttons={true}
+        />
+      )}
+
       {status === "loading" && <Spinner />}
       {!data?.Search && status !== "loading" && (
         <Background image={search_bg} />

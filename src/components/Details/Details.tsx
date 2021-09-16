@@ -3,7 +3,14 @@ import { apiRequest } from "../../api/apiRequest";
 import { useQuery } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
-import { Wrapper, Left, Image, Right, Error } from "./Details.styles";
+import {
+  Wrapper,
+  Left,
+  Image,
+  ButtonsWrapper,
+  Right,
+  Error,
+} from "./Details.styles";
 import { Spinner } from "../Spinner/Spinner";
 import { ParamTypes, DataTypes } from "../../types/types";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
@@ -70,35 +77,37 @@ const Details: React.FC = () => {
                 src={data.Poster === "N/A" ? blankPosterImage : data.Poster}
                 alt={data.Title}
               />
-              {isInWatchlist ? (
-                <div onClick={removeFromWatchlistHandler}>
-                  <Button text="Remove From Watchlis" />
-                </div>
-              ) : (
-                <div onClick={addToWatchlistHandler}>
-                  <Button
-                    text={`  Add To Watchlist ${
-                      isInWatchedlist ? "Again" : null
-                    }`}
-                  />
-                </div>
-              )}
-              {isInWatchedlist && (
-                <div onClick={removeFromWatchedHandler}>
-                  <Button text="Remove From Watched" />
-                </div>
-              )}
-              {!isInWatchedlist && !isInWatchlist && (
-                <div onClick={addToWatchedHandler}>
-                  <Button text="Add To Watched" />
-                </div>
-              )}
-              {!isInWatchedlist && isInWatchlist && (
-                <div onClick={moveToWatchedHandler}>
-                  {" "}
-                  <Button text="Move To Watched" />
-                </div>
-              )}
+              <ButtonsWrapper>
+                {isInWatchlist ? (
+                  <div onClick={removeFromWatchlistHandler}>
+                    <Button text="Remove From Watchlist" />
+                  </div>
+                ) : (
+                  <div onClick={addToWatchlistHandler}>
+                    <Button
+                      text={`  Add To Watchlist ${
+                        isInWatchedlist ? "Again" : ""
+                      }`}
+                    />
+                  </div>
+                )}
+                {isInWatchedlist && (
+                  <div onClick={removeFromWatchedHandler}>
+                    <Button text="Remove From Watched" />
+                  </div>
+                )}
+                {!isInWatchedlist && !isInWatchlist && (
+                  <div onClick={addToWatchedHandler}>
+                    <Button text="Add To Watched" />
+                  </div>
+                )}
+                {!isInWatchedlist && isInWatchlist && (
+                  <div onClick={moveToWatchedHandler}>
+                    {" "}
+                    <Button text="Move To Watched" />
+                  </div>
+                )}
+              </ButtonsWrapper>
             </Left>
             <Right>
               <h2>{data.Title}</h2>

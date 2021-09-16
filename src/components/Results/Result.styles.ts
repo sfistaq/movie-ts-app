@@ -1,105 +1,44 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-export const Container = styled.div`
-  height: 100%;
+export const Wrapper = styled.div<{ center: boolean }>`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: ${({ center }) => (center ? "space-evenly" : "start")};
+  height: 100%;
+  @media screen and (max-width: 1024px) {
+    height: auto;
+  }
 `;
 
 export const ResultsItems = styled.div`
   display: grid;
-  height: 100%;
-  margin: 30px 0 20px 0;
-  grid-gap: 20px;
+  margin: 18px 0;
+  grid-gap: 14px;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  align-content: flex-start;
 
-  @media screen and (max-width: 1050px) {
+  @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
   }
 
   @media screen and (max-width: 860px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  @media screen and (max-width: 630px) {
+  @media screen and (max-width: 650px) {
     grid-template-columns: repeat(2, 1fr);
   }
 `;
 
-export const Card = styled(Link)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color: var(--color-white);
-  height: 280px;
-  width: 190px;
-  color: var(--color-gray-dark);
-  border: 3px solid var(--color-white);
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
-  &:hover {
-    transform: scale(1.04);
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
-      rgba(0, 0, 0, 0.05) 0px 5px 10px;
-  }
-`;
-
-export const Image = styled.img`
-  min-height: 80%;
-  min-width: 100%;
-  object-fit: fill;
-  border: 3px solid var(--color-white);
-  border-radius: var(--border-radius);
-  opacity: 0.8;
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-export const Description = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  color: inherit;
-`;
-
 export const ButtonsContainer = styled.div`
   width: 100%;
-  margin: 10px auto;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const Button = styled.button`
-  width: 80px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  margin-left: 5px;
-  background-color: var(--color-dark-blue);
-  color: var(--color-gold);
-
-  &:disabled {
-    background-color: var(--color-blue);
-    color: var(--color-light-blue);
-  }
+  margin-bottom: 10px;
 `;
 
 export const Pages = styled.span`
-  margin: 0 10px;
+  margin: 0 12px;
   font-size: 20px;
   color: var(--color-gray-dark);
   font-weight: 500;

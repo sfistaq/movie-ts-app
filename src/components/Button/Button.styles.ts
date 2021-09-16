@@ -7,7 +7,7 @@ export const CustomButton = styled.button<{ disabled: boolean }>`
   border-radius: var(--border-radius);
   border: none;
   outline: none;
-  padding: 15px;
+  padding: 14px;
   margin: 0 10px;
   font-size: 18px;
   background-color: var(--color-gray-dark);
@@ -15,6 +15,7 @@ export const CustomButton = styled.button<{ disabled: boolean }>`
     disabled ? "var(--color-gray)" : "var(--color-white)"};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   cursor: ${({ disabled }) => (disabled ? "arrow" : "pointer")};
+  transition: var(--transition);
   &:hover {
     transform: ${({ disabled }) => (disabled ? "none" : "translateY(-2px)")};
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,

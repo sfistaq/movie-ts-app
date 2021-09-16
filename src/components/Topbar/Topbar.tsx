@@ -5,7 +5,7 @@ import { data } from "./data";
 import * as constants from "../../utils/constants";
 
 import {
-  Container,
+  TopbarContainer,
   MovieIcon,
   LinksContainer,
   Link,
@@ -26,7 +26,7 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
   const { watchlist, watched } = useContext(FavContext);
 
   return (
-    <Container>
+    <TopbarContainer>
       <MovieIcon />
       {windowWidth > constants.BREAKPOINT && (
         <LinksContainer>
@@ -57,7 +57,7 @@ const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
       ) : (
         <MenuIcon onClick={() => setMenuOpen((prev: boolean) => !menuOpen)} />
       )}
-    </Container>
+    </TopbarContainer>
   );
 };
 

@@ -32,6 +32,8 @@ html {
   --background-nav: rgba(0, 0, 0, 0.3);
   --background-blur: blur(10px);
   --border-radius: 3px;
+  --transition: all 0.3s ease;
+  --transition-slow: all 0.6s ease;
 
 }
 `;
@@ -40,6 +42,7 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 70px);
+  padding-top: 65px;
+  height: calc(100vh);
   width: 100vw;
 `;

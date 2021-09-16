@@ -9,13 +9,13 @@ export const Container = styled.div<{ active: boolean }>`
   justify-content: center;
   width: 100vw;
   height: ${({ active }) => (active ? "100vh" : "0")};
-  top: ${({ active }) => (active ? "70" : "-100vh")};
+  top: ${({ active }) => (active ? "65" : "-100vh")};
   opacity: ${({ active }) => (active ? "100" : "0")};
   background-color: var(--background-nav);
   backdrop-filter: var(--background-blur);
   color: var(--color-white);
   z-index: 50;
-  transition: all 0.6s ease-out;
+  transition: var(--transition-slow);
 `;
 
 export const LinksContainer = styled.ul`

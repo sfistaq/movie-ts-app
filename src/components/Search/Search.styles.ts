@@ -39,16 +39,7 @@ export const Select = styled.select<{ inputWidth: number }>`
   outline: none;
   border: none;
   margin: 0 5px;
-
-  width: ${(props) => `${props.inputWidth}px`};
+  max-width: ${(props) => `${props.inputWidth}px`};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 export const Option = styled.option``;
-
-export const ResultsContainer = styled.div`
-  width: 100%;
-  margin: auto 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;

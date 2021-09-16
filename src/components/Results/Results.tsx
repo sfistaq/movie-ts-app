@@ -1,15 +1,13 @@
 import { Data, MovieDataResponse } from "../../types/types";
 import {
-  Container,
+  Wrapper,
   ResultsItems,
-  Card,
-  Image,
-  Description,
   ButtonsContainer,
   Pages,
 } from "./Result.styles";
 import Button from "../Button/Button";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
+import Card from "../Card/Card";
 
 interface Props {
   data: Data;
@@ -23,16 +21,17 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
   const pagesNumber =
     searchResultsLength <= 10 ? 1 : Math.floor(+data.totalResults / 10) + 1;
   return (
-    <Container>
+    <Wrapper center={buttons}>
       <ResultsItems>
         {data.Search.map((item: MovieDataResponse) => (
-          <Card key={item.imdbID} to={`/details/${item.imdbID}`}>
-            <Image
-              src={item.Poster === "N/A" ? blankPosterImage : item.Poster}
-              alt={item.Title}
+          <div key={item.imdbID}>
+            <Card
+              link={`/details/${item.imdbID}`}
+              image={item.Poster === "N/A" ? blankPosterImage : item.Poster}
+              imageAlt={item.Title}
+              title={item.Title}
             />
-            <Description>{item.Title}</Description>
-          </Card>
+          </div>
         ))}
       </ResultsItems>
       {buttons && (
@@ -54,7 +53,7 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
           </div>
         </ButtonsContainer>
       )}
-    </Container>
+    </Wrapper>
   );
 };
 

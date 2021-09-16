@@ -20,7 +20,7 @@ const Watched: React.FC = () => {
   return (
     <Container>
       {data.Response === "empty" ? (
-        <Status text="Add some movies to watched list" />
+        <Status text="Add some movies to watched list..." />
       ) : (
         <Status
           text={`You watched ${+data.totalResults}

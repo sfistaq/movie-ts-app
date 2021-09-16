@@ -11,4 +11,5 @@ export const Container = styled.div<{ image: string }>`
   background-repeat: no-repeat;
   background-position: center;
   background-size: 400px;
+  opacity: 0.9;
 `;

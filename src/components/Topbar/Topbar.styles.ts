@@ -3,13 +3,13 @@ import { Link as RouterLink } from "react-router-dom";
 import { FiVideo } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 
-export const Container = styled.div`
-  position: sticky;
+export const TopbarContainer = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 65px;
   padding: 0 10px;
   color: var(--color-white);
   background-color: var(--background-nav);
@@ -40,6 +40,7 @@ export const Link = styled(RouterLink)<{ active: string }>`
   text-transform: capitalize;
   margin: 0 20px;
   text-decoration: none;
+  transition: var(--transition);
   color: ${({ active }) =>
     active === "true" ? "var(--color-gray-dark)" : "inherit"};
   font-weight: ${({ active }) => (active === "true" ? 400 : 300)};
@@ -55,11 +56,11 @@ export const ItemCount = styled.span`
   position: absolute;
   top: 4px;
   right: -24px;
-  padding: 4px 9px;
+  padding: 7px 10px;
   border-radius: 50%;
   background-color: var(--color-red);
   color: var(--color-white);
-  font-size: 11px;
+  font-size: 10px;
   text-align: center;
 `;
 
