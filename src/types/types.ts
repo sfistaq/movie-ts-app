@@ -2,8 +2,7 @@ export interface RatingsType {
   Source: string;
   Value: string;
 }
-
-export interface DataTypes {
+export interface OMDBData {
   Title: string;
   Year: string;
   Rated: string;
@@ -31,29 +30,29 @@ export interface DataTypes {
   imdbVotes: string;
 }
 
-export interface FavTypes {
-  watchlist: DataTypes[];
-  watched: DataTypes[];
-  addToWatchlist: (data: DataTypes) => void;
+export interface FavContextTypes {
+  watchlist: OMDBData[];
+  watched: OMDBData[];
+  addToWatchlist: (data: OMDBData) => void;
   removeFromWatchlist: (id: string) => void;
-  addToWatched: (data: DataTypes) => void;
+  addToWatched: (data: OMDBData) => void;
   removeFromWatched: (id: string) => void;
-  moveToWatched: (data: DataTypes) => void;
+  moveToWatched: (data: OMDBData) => void;
 }
 
 export interface FavReducer {
-  watchlist: DataTypes[];
-  watched: DataTypes[];
+  watchlist: OMDBData[];
+  watched: OMDBData[];
 }
 
 export type FavActions =
-  | { type: "ADD_TO_WATCHLIST"; data: DataTypes }
+  | { type: "ADD_TO_WATCHLIST"; data: OMDBData }
   | { type: "REMOVE_FROM_WATCHLIST"; id: string }
-  | { type: "ADD_TO_WATCHED"; data: DataTypes }
+  | { type: "ADD_TO_WATCHED"; data: OMDBData }
   | { type: "REMOVE_FROM_WATCHED"; id: string }
-  | { type: "MOVE_TO_WATCHED"; data: DataTypes };
+  | { type: "MOVE_TO_WATCHED"; data: OMDBData };
 
-export interface SearchTypes {
+export interface SearchContextTypes {
   title: string;
   year: string;
   page: number;
@@ -77,13 +76,18 @@ export type SearchActions =
   | { type: "SET_PAGE"; page: number }
   | { type: "SET_TYPE"; searchType: string };
 
-export interface TopBarData {
+export interface NavLinks {
   id: number;
   text: string;
   link: string;
 }
 
-export interface MovieDataResponse {
+export interface SelectData {
+  id: number;
+  value: string;
+}
+
+export interface MovieData {
   Poster: string;
   Title: string;
   Type: string;
@@ -91,12 +95,15 @@ export interface MovieDataResponse {
   imdbID: string;
 }
 
-export interface Data {
+export interface ResponseData {
   Response: string;
-  Search: MovieDataResponse[];
+  Search: MovieData[];
   totalResults: string;
 }
 
-export interface ParamTypes {
-  id: string;
+export interface Breakpoints {
+  xl: string;
+  l: string;
+  m: string;
+  s: string;
 }

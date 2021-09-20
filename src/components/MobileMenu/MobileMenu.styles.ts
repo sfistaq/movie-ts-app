@@ -8,13 +8,13 @@ export const Container = styled.div<{ active: boolean }>`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: ${({ active }) => (active ? "100vh" : "0")};
-  top: ${({ active }) => (active ? "65" : "-100vh")};
-  opacity: ${({ active }) => (active ? "100" : "0")};
+  height: ${({ active }) => (active ? "100%" : "0")};
+  top: ${({ active }) => (active ? "65px" : "-100vh")};
+  color: var(--color-white);
   background-color: var(--background-nav);
   backdrop-filter: var(--background-blur);
-  color: var(--color-white);
-  z-index: 50;
+  -webkit-backdrop-filter: var(--background-blur);
+  z-index: 10;
   transition: var(--transition-slow);
 `;
 
@@ -26,6 +26,7 @@ export const LinksContainer = styled.ul`
 `;
 
 export const NavLink = styled(Link)`
+  position: relative;
   color: inherit;
   text-decoration: none;
   text-transform: capitalize;

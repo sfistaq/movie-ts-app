@@ -1,9 +1,9 @@
 import React, { createContext, useReducer } from "react";
-import { SearchTypes } from "../../types/types";
+import { SearchContextTypes } from "../../types/types";
 import * as actionTypes from "../actionTypes";
 import searchReducer from "./SearchReducer";
 
-const initState: SearchTypes = {
+const initState: SearchContextTypes = {
   title: "",
   year: "",
   page: 1,
@@ -14,7 +14,7 @@ const initState: SearchTypes = {
   setTypeHandler: () => {},
 };
 
-export const SearchContext = createContext<SearchTypes>(initState);
+export const SearchContext = createContext<SearchContextTypes>(initState);
 
 const SearchState: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(searchReducer, initState);

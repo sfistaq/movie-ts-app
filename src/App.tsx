@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (windowWidth > constants.BREAKPOINT) {
+    if (windowWidth > constants.SCREEN_M) {
       setMenuOpen(false);
     }
   }, [windowWidth]);

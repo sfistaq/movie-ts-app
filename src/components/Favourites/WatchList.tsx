@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { FavContext } from "../../store/Favourite/FavState";
 import { SearchContext } from "../../store/Search/SearchState";
+import { Container } from "../../styles/global";
 import Results from "../Results/Results";
 import Status from "../Status/Status";
 import Background from "../Background/Background";
 import watchlist_bg from "../../assets/images/watchlist_bg.svg";
-import { Container } from "../../styles/global";
 
 const WatchList: React.FC = () => {
   const { watchlist } = useContext(FavContext);

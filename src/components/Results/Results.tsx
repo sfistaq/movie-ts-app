@@ -1,19 +1,19 @@
-import { Data, MovieDataResponse } from "../../types/types";
+import { ResponseData, MovieData } from "../../types/types";
+import Button from "../Button/Button";
+import Card from "../Card/Card";
 import {
   Wrapper,
   ResultsItems,
   ButtonsContainer,
   Pages,
 } from "./Result.styles";
-import Button from "../Button/Button";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
-import Card from "../Card/Card";
 
 interface Props {
-  data: Data;
+  data: ResponseData;
   page: number;
-  setPage: (page: number) => void;
   buttons: boolean;
+  setPage: (page: number) => void;
 }
 
 const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
@@ -23,7 +23,7 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
   return (
     <Wrapper center={buttons}>
       <ResultsItems>
-        {data.Search.map((item: MovieDataResponse) => (
+        {data.Search.map((item: MovieData) => (
           <div key={item.imdbID}>
             <Card
               link={`/details/${item.imdbID}`}

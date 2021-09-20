@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { breakpoints } from "../../utils/breakpoints";
 
 export const CardBody = styled(Link)`
   display: flex;
@@ -14,25 +15,30 @@ export const CardBody = styled(Link)`
   text-decoration: none;
   overflow: hidden;
   transition: var(--transition);
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  box-shadow: var(--shadow-1);
+
   &:hover {
     transform: scale(1.04);
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
-      rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    box-shadow: var(--shadow-2);
+    @media screen and (max-width: 499px) {
+      transform: none;
+    }
   }
-  @media screen and (max-width: 1024px) {
+  @media ${breakpoints.xl} {
     height: 270px;
     width: 190px;
   }
-
-  @media screen and (max-width: 860px) {
+  @media ${breakpoints.l} {
     height: 290px;
     width: 200px;
   }
-  @media screen and (max-width: 630px) {
+  @media ${breakpoints.m} {
     height: 300px;
     width: 230px;
+  }
+  @media ${breakpoints.s} {
+    height: 265px;
+    width: 200px;
   }
 `;
 
@@ -44,6 +50,7 @@ export const Image = styled.img`
   border-radius: var(--border-radius);
   opacity: 0.85;
   transition: var(--transition);
+
   &:hover {
     opacity: 1;
   }

@@ -3,6 +3,11 @@ import { apiRequest } from "../../api/apiRequest";
 import { useQuery } from "react-query";
 import { useParams, useHistory } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
+import { OMDBData } from "../../types/types";
+import { Container } from "../../styles/global";
+import { Spinner } from "../Spinner/Spinner";
+import Button from "../Button/Button";
+import Status from "../Status/Status";
 import {
   Wrapper,
   Poster,
@@ -11,16 +16,12 @@ import {
   Description,
   Error,
 } from "./Details.styles";
-import { Spinner } from "../Spinner/Spinner";
-import { ParamTypes, DataTypes } from "../../types/types";
-import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 import * as constants from "../../utils/constants";
-import { Container } from "../../styles/global";
-import Button from "../Button/Button";
-import Status from "../Status/Status";
+import blankPosterImage from "../../assets/images/blank-poster.jpeg";
+import Watched from "../Favourites/Watched";
 
 const Details: React.FC = () => {
-  const { id } = useParams<ParamTypes>();
+  const { id } = useParams<{ id: string }>();
   const { data, error, status } = useQuery(["details", id], () =>
     apiRequest(`?i=${id}&plot=full`)
   );
@@ -61,10 +62,9 @@ const Details: React.FC = () => {
     history.push("/watched");
   };
 
-  //prettier-ignore
-  const isInWatchlist = watchlist.some((item: DataTypes) => item?.imdbID === data?.imdbID);
-  //prettier-ignore
-  const isInWatchedlist = watched.some((item: DataTypes) => item?.imdbID === data?.imdbID);
+  const isOnFavList = (fav: OMDBData[]) => {
+    return fav.some((item: OMDBData) => item?.imdbID === data?.imdbID);
+  };
 
   return (
     <Container>
@@ -79,7 +79,7 @@ const Details: React.FC = () => {
                 alt={data.Title}
               />
               <ButtonsWrapper>
-                {isInWatchlist ? (
+                {isOnFavList(watchlist) ? (
                   <div onClick={removeFromWatchlistHandler}>
                     <Button text="Remove From Watchlist" />
                   </div>
@@ -87,22 +87,22 @@ const Details: React.FC = () => {
                   <div onClick={addToWatchlistHandler}>
                     <Button
                       text={`  Add To Watchlist ${
-                        isInWatchedlist ? "Again" : ""
+                        isOnFavList(watched) ? "Again" : ""
                       }`}
                     />
                   </div>
                 )}
-                {isInWatchedlist && (
+                {isOnFavList(watched) && (
                   <div onClick={removeFromWatchedHandler}>
                     <Button text="Remove From Watched" />
                   </div>
                 )}
-                {!isInWatchedlist && !isInWatchlist && (
+                {!isOnFavList(watched) && !isOnFavList(watchlist) && (
                   <div onClick={addToWatchedHandler}>
                     <Button text="Add To Watched" />
                   </div>
                 )}
-                {!isInWatchedlist && isInWatchlist && (
+                {!isOnFavList(watched) && isOnFavList(watchlist) && (
                   <div onClick={moveToWatchedHandler}>
                     {" "}
                     <Button text="Move To Watched" />
@@ -128,12 +128,14 @@ const Details: React.FC = () => {
             </Description>
           </Wrapper>
         )}
+
       {!data && status === "loading" && (
-        <div>
+        <>
           <Status text="Loading..." />
           <Spinner />
-        </div>
+        </>
       )}
+
       {data?.Error === constants.ERROR && (
         <Error>Error, Incorrect IMDb ID.</Error>
       )}

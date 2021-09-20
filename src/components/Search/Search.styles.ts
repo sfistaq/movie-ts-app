@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { breakpoints } from "../../utils/breakpoints";
+
+const inputs = css`
+  height: 100%;
+  border-radius: var(--border-radius);
+  outline: none;
+  border: none;
+  box-shadow: var(--shadow-3);
+`;
 
 export const Form = styled.form`
   width: 100%;
@@ -9,16 +18,12 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input<{ inputWidth: number }>`
-  height: 100%;
-  border-radius: var(--border-radius);
-  outline: none;
-  border: none;
+  ${inputs}
   width: ${(props) => `${props.inputWidth}px`};
   margin: 0 10px;
   padding-left: 10px;
   color: var(--color-gray-dark);
   font-size: 16px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
   &:focus {
     border: 1px solid var(--color-gray-light);
@@ -31,15 +36,15 @@ export const Input = styled.input<{ inputWidth: number }>`
     -webkit-appearance: none;
     margin: 0;
   }
+
+  @media ${breakpoints.s} {
+    margin: 0 4px;
+    font-size: 14px;
+  }
 `;
 
 export const Select = styled.select<{ inputWidth: number }>`
-  height: 50px;
-  border-radius: var(--border-radius);
-  outline: none;
-  border: none;
+  ${inputs}
   margin: 0 5px;
   max-width: ${(props) => `${props.inputWidth}px`};
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
-export const Option = styled.option``;

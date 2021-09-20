@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoints } from "../../utils/breakpoints";
 
 export const Wrapper = styled.div<{ center: boolean }>`
   display: flex;
@@ -13,19 +14,22 @@ export const Wrapper = styled.div<{ center: boolean }>`
 export const ResultsItems = styled.div`
   display: grid;
   margin: 18px 0;
-  grid-gap: 14px;
+  grid-gap: 10px;
   grid-template-columns: repeat(5, 1fr);
   align-content: flex-start;
 
-  @media screen and (max-width: 1024px) {
+  @media ${breakpoints.xl} {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media screen and (max-width: 860px) {
+  @media ${breakpoints.l} {
     grid-template-columns: repeat(3, 1fr);
   }
-  @media screen and (max-width: 650px) {
+  @media ${breakpoints.m} {
     grid-template-columns: repeat(2, 1fr);
+  }
+  @media ${breakpoints.s} {
+    grid-gap: 8px;
   }
 `;
 
@@ -34,7 +38,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 export const Pages = styled.span`

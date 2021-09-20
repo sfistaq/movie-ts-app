@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoints } from "../../utils/breakpoints";
 
 export const CustomButton = styled.button<{ disabled: boolean }>`
   display: flex;
@@ -13,25 +14,30 @@ export const CustomButton = styled.button<{ disabled: boolean }>`
   background-color: var(--color-gray-dark);
   color: ${({ disabled }) =>
     disabled ? "var(--color-gray)" : "var(--color-white)"};
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: var(--shadow-3);
   cursor: ${({ disabled }) => (disabled ? "arrow" : "pointer")};
   transition: var(--transition);
+
   &:hover {
     transform: ${({ disabled }) => (disabled ? "none" : "translateY(-2px)")};
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-shadow: var(--shadow-4);
   }
+
   &:active {
     transform: ${({ disabled }) => (disabled ? "none" : "translateY(1px)")};
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: var(--shadow-5);
   }
   & > svg {
     font-size: inherit;
     margin-left: 4px;
   }
-  @media screen and (max-width: 600px) {
+
+  @media ${breakpoints.m} {
     padding: 12px;
     font-size: 14px;
+  }
+  @media ${breakpoints.s} {
+    padding: 18px;
+    font-size: 12px;
   }
 `;

@@ -1,17 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useQuery } from "react-query";
 import { apiRequest } from "../../api/apiRequest";
 import { SearchContext } from "../../store/Search/SearchState";
-import { useQuery } from "react-query";
-import Results from "../Results/Results";
+import { selectOptions } from "./data";
+import { SelectData } from "../../types/types";
 import { Spinner } from "../Spinner/Spinner";
+import { Container } from "../../styles/global";
+import Results from "../Results/Results";
 import Status from "../Status/Status";
 import Button from "../Button/Button";
 import Background from "../Background/Background";
-import { Form, Input, Select, Option } from "./Search.styles";
-import { Container } from "../../styles/global";
-import * as constants from "../../utils/constants";
+import { Form, Input, Select } from "./Search.styles";
 import { BiSearchAlt } from "react-icons/bi";
 import search_bg from "../../assets/images/search_bg.svg";
+import * as constants from "../../utils/constants";
 
 const Search: React.FC = () => {
   const {
@@ -102,9 +104,11 @@ const Search: React.FC = () => {
         />
 
         <Select value={searchType} onChange={handleChange} inputWidth={80}>
-          <Option value="movie">Movie</Option>
-          <Option value="series">Series</Option>
-          <Option value="game">Game</Option>
+          {selectOptions.map((item: SelectData) => (
+            <option key={item.id} value={item.value}>
+              {item.value}
+            </option>
+          ))}
         </Select>
         <Button text="search" icon={<BiSearchAlt />} />
       </Form>

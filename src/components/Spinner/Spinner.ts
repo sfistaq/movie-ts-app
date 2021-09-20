@@ -12,7 +12,7 @@ const spin: Keyframes = keyframes`
 export const Spinner = styled.div`
   position: absolute;
   top: 50%;
-  left: 48%;
+  left: 47%;
   border: 8px solid rgba(0, 0, 0, 0.1);
   border-top: 8px solid var(--color-white);
   border-radius: 50%;

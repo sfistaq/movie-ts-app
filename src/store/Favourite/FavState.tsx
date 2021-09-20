@@ -1,12 +1,12 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import { DataTypes, FavTypes } from "../../types/types";
+import { OMDBData, FavContextTypes } from "../../types/types";
 import * as actionTypes from "../actionTypes";
 import favReducer from "./FavReducer";
 
 const watchlistStore: any = localStorage.getItem("watchlist");
 const watchedStore: any = localStorage.getItem("watched");
 
-const initState: FavTypes = {
+const initState: FavContextTypes = {
   watchlist: localStorage.getItem("watchlist")
     ? JSON.parse(watchlistStore)
     : [],
@@ -18,12 +18,12 @@ const initState: FavTypes = {
   moveToWatched: () => {},
 };
 
-export const FavContext = createContext<FavTypes>(initState);
+export const FavContext = createContext<FavContextTypes>(initState);
 
 const FavState: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(favReducer, initState);
 
-  const addToWatchlist = (data: DataTypes) => {
+  const addToWatchlist = (data: OMDBData) => {
     dispatch({
       type: actionTypes.ADD_TO_WATCHLIST,
       data: data,
@@ -37,7 +37,7 @@ const FavState: React.FC = ({ children }) => {
     });
   };
 
-  const addToWatched = (data: DataTypes) => {
+  const addToWatched = (data: OMDBData) => {
     dispatch({
       type: actionTypes.ADD_TO_WATCHED,
       data: data,
@@ -51,7 +51,7 @@ const FavState: React.FC = ({ children }) => {
     });
   };
 
-  const moveToWatched = (data: DataTypes) => {
+  const moveToWatched = (data: OMDBData) => {
     dispatch({
       type: actionTypes.MOVE_TO_WATCHED,
       data: data,
