@@ -3,14 +3,14 @@ import { OMDBData, FavContextTypes } from "../../types/types";
 import * as actionTypes from "../actionTypes";
 import favReducer from "./FavReducer";
 
-const watchlistStore: any = localStorage.getItem("watchlist");
-const watchedStore: any = localStorage.getItem("watched");
+const watchlistStore: string | null = localStorage.getItem("watchlist");
+const watchedStore: string | null = localStorage.getItem("watched");
 
 const initState: FavContextTypes = {
   watchlist: localStorage.getItem("watchlist")
-    ? JSON.parse(watchlistStore)
+    ? JSON.parse(watchlistStore!)
     : [],
-  watched: localStorage.getItem("watchlist") ? JSON.parse(watchedStore) : [],
+  watched: localStorage.getItem("watchlist") ? JSON.parse(watchedStore!) : [],
   addToWatchlist: () => {},
   removeFromWatchlist: () => {},
   addToWatched: () => {},

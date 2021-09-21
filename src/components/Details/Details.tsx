@@ -18,7 +18,6 @@ import {
 } from "./Details.styles";
 import * as constants from "../../utils/constants";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
-import Watched from "../Favourites/Watched";
 
 const Details: React.FC = () => {
   const { id } = useParams<{ id: string }>();

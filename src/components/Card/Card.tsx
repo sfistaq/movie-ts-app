@@ -1,6 +1,7 @@
 import React from "react";
 import { MovieData } from "../../types/types";
 import { CardBody, Image, Description } from "./Card.styles";
+
 interface Props {
   link: string;
   image: string | keyof MovieData;
