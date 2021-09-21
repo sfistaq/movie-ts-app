@@ -1,24 +1,24 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Container = styled.div<{ active: boolean }>`
+export const Wrapper = styled.div<{ active: boolean }>`
   position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: ${({ active }) => (active ? "100%" : "0")};
   top: ${({ active }) => (active ? "65px" : "-100vh")};
   color: var(--color-white);
   background-color: var(--background-nav);
-  backdrop-filter: var(--background-blur);
-  -webkit-backdrop-filter: var(--background-blur);
-  z-index: 10;
+  backdrop-filter: ${({ active }) => (active ? "blur(10px)" : "none")};
+  -webkit-backdrop-filter: ${({ active }) => (active ? "blur(10px)" : "none")};
+  z-index: 100;
   transition: var(--transition-slow);
 `;
 
-export const LinksContainer = styled.ul`
+export const LinksContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -3,7 +3,7 @@ import { FavContext } from "../../store/Favourite/FavState";
 import { data } from "../Topbar/data";
 import { NavLinks } from "../../types/types";
 import { Counter } from "../Counter/Counter";
-import { Container, LinksContainer, NavLink } from "./MobileMenu.styles";
+import { Wrapper, LinksContainer, NavLink } from "./MobileMenu.styles";
 
 interface Props {
   menuOpen: boolean;
@@ -13,7 +13,10 @@ interface Props {
 const MobileMenu: React.FC<Props> = ({ menuOpen, setMenuOpen }) => {
   const { watchlist, watched } = useContext(FavContext);
   return (
-    <Container active={menuOpen}>
+    <Wrapper
+      active={menuOpen}
+      // style={{ backdropFilter: "blur(10px)" }}
+    >
       <LinksContainer>
         {data.map((item: NavLinks) => (
           <NavLink
@@ -31,7 +34,7 @@ const MobileMenu: React.FC<Props> = ({ menuOpen, setMenuOpen }) => {
           </NavLink>
         ))}
       </LinksContainer>
-    </Container>
+    </Wrapper>
   );
 };
 
