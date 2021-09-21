@@ -2,18 +2,14 @@
 
 ## Build using
 
-- React
-- TypeScript
-- React Router
-- OMDB API
-- React Query
-- Styled Components
-- Context API
-- LocalStorage
+- ![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+- ![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+- ![react-router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+- ![styled-components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
 ## Summary
 
-This app display a list of movies, series or games that match a users search term. User can add search title to lists watched or watchlist. Clicking on the movie card takes user to the details page. You can check live [DEMO](https://movie-app-ts.netlify.app) uploaded to Netlify.
+This app display a list of movies, series or games that match a users search term. User can add search title to lists watched or watchlist. Clicking on the movie card takes user to the details page. You can check live [DEMO](https://movie-app-ts.netlify.app) uploaded to ![netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
 
 ## To initialize this project and its dependencies
 
