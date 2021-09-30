@@ -65,8 +65,8 @@ const Search: React.FC = () => {
       )}
       {data && data.Response === "True" && (
         <Status
-          text={` we are found ${data.totalResults}
-        ${searchType}
+          text={` found: ${data.totalResults}
+        ${searchType}${+data.totalResults > 1 ? "s" : ""}
        `}
         />
       )}
