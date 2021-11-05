@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { apiRequest } from "../../api/apiRequest";
 import { useQuery } from "react-query";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FavContext } from "../../store/Favourite/FavState";
 import { OMDBData } from "../../types/types";
 import { Container } from "../../styles/global";
@@ -20,11 +20,11 @@ import * as constants from "../../utils/constants";
 import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 
 const Details: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<string>();
+
   const { data, error, status } = useQuery(["details", id], () =>
     apiRequest(`?i=${id}&plot=full`)
   );
-
   const {
     watchlist,
     watched,
@@ -34,31 +34,31 @@ const Details: React.FC = () => {
     removeFromWatched,
     moveToWatched,
   } = useContext(FavContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const addToWatchlistHandler = () => {
     addToWatchlist(data);
-    history.push("/watchlist");
+    navigate("/watchlist");
   };
 
   const removeFromWatchlistHandler = () => {
     removeFromWatchlist(data.imdbID);
-    history.push("/watchlist");
+    navigate("/watchlist");
   };
 
   const addToWatchedHandler = () => {
     addToWatched(data);
-    history.push("/watched");
+    navigate("/watched");
   };
 
   const removeFromWatchedHandler = () => {
     removeFromWatched(data.imdbID);
-    history.push("/watched");
+    navigate("/watched");
   };
 
   const moveToWatchedHandler = () => {
     moveToWatched(data);
-    history.push("/watched");
+    navigate("/watched");
   };
 
   const isOnFavList = (fav: OMDBData[]) => {

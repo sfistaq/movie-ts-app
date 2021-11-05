@@ -9,7 +9,7 @@
 
 ## Summary
 
-This app display a list of movies, series or games that match a users search term. User can add search title to lists watched or watchlist. Clicking on the movie card takes user to the details page. You can check live [DEMO](https://movie-app-ts.netlify.app) uploaded to ![netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+This movie search App display a list of movies, series or games that match a users search term, using OMDB API (www.omdbapi.com). User can add search title to lists "watchlist" or "watched". Clicking on the movie card takes user to the details page. You can check live [DEMO](https://movie-app-ts.netlify.app) uploaded to ![netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
 
 ## To initialize this project and its dependencies
 

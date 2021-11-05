@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { GlobalStyle } from "./styles/global";
 import SearchState from "./store/Search/SearchState";
 import FavState from "./store/Favourite/FavState";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 //import { ReactQueryDevtools } from "react-query/devtools";
 import Topbar from "./components/Topbar/Topbar";
@@ -48,13 +48,12 @@ function App() {
               windowWidth={windowWidth}
             />
             <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-            <Switch>
-              <Route path="/" exact component={Search} />
-              <Route path="/details/:id" component={Details} />
-              <Route path="/watchlist" component={WatchList} />
-              <Route path="/watched" component={Watched} />
-              <Redirect to="/" />
-            </Switch>
+            <Routes>
+              <Route path="/" element={<Search />} />
+              <Route path="/details/:id" element={<Details />} />
+              <Route path="/watchlist" element={<WatchList />} />
+              <Route path="/watched" element={<Watched />} />
+            </Routes>
           </FavState>
         </SearchState>
       </BrowserRouter>
