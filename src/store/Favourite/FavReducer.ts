@@ -6,34 +6,34 @@ const favReducer = (state: FavReducer, action: FavActions): FavReducer => {
     case actionTypes.ADD_TO_WATCHLIST:
       return {
         ...state,
-        watchlist: [action.data, ...state.watchlist],
+        watchlist: [action.payload, ...state.watchlist],
       };
     case actionTypes.REMOVE_FROM_WATCHLIST:
       return {
         ...state,
         watchlist: state.watchlist.filter(
-          (item: OMDBData) => item.imdbID !== action.id
+          (item: OMDBData) => item.imdbID !== action.payload
         ),
       };
     case actionTypes.ADD_TO_WATCHED:
       return {
         ...state,
-        watched: [action.data, ...state.watched],
+        watched: [action.payload, ...state.watched],
       };
     case actionTypes.REMOVE_FROM_WATCHED:
       return {
         ...state,
         watched: state.watched.filter(
-          (item: OMDBData) => item.imdbID !== action.id
+          (item: OMDBData) => item.imdbID !== action.payload
         ),
       };
     case actionTypes.MOVE_TO_WATCHED:
       return {
         ...state,
         watchlist: state.watchlist.filter(
-          (item: OMDBData) => item.imdbID !== action.data.imdbID
+          (item: OMDBData) => item.imdbID !== action.payload.imdbID
         ),
-        watched: [action.data, ...state.watched],
+        watched: [action.payload, ...state.watched],
       };
     default:
       return state;

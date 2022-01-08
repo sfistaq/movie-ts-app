@@ -7,7 +7,9 @@ import Background from "../Background/Background";
 import watchlist_bg from "../../assets/images/watchlist_bg.svg";
 
 const WatchList: React.FC = () => {
-  const { watchlist } = useContext(FavContext);
+  const {
+    state: { watchlist },
+  } = useContext(FavContext);
 
   const data = {
     Response: watchlist.length === 0 ? "empty" : "added",

@@ -11,7 +11,9 @@ interface Props {
 }
 
 const MobileMenu: React.FC<Props> = ({ menuOpen, setMenuOpen }) => {
-  const { watchlist, watched } = useContext(FavContext);
+  const {
+    state: { watchlist, watched },
+  } = useContext(FavContext);
   return (
     <Wrapper
       active={menuOpen}

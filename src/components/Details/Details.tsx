@@ -26,38 +26,33 @@ const Details: React.FC = () => {
     apiRequest(`?i=${id}&plot=full`)
   );
   const {
-    watchlist,
-    watched,
-    addToWatchlist,
-    removeFromWatchlist,
-    addToWatched,
-    removeFromWatched,
-    moveToWatched,
+    dispatch,
+    state: { watchlist, watched },
   } = useContext(FavContext);
   const navigate = useNavigate();
 
   const addToWatchlistHandler = () => {
-    addToWatchlist(data);
+    dispatch({ type: "ADD_TO_WATCHLIST", payload: data });
     navigate("/watchlist");
   };
 
   const removeFromWatchlistHandler = () => {
-    removeFromWatchlist(data.imdbID);
+    dispatch({ type: "REMOVE_FROM_WATCHLIST", payload: data.imdbID });
     navigate("/watchlist");
   };
 
   const addToWatchedHandler = () => {
-    addToWatched(data);
+    dispatch({ type: "ADD_TO_WATCHED", payload: data });
     navigate("/watched");
   };
 
   const removeFromWatchedHandler = () => {
-    removeFromWatched(data.imdbID);
+    dispatch({ type: "REMOVE_FROM_WATCHED", payload: data.imdbID });
     navigate("/watched");
   };
 
   const moveToWatchedHandler = () => {
-    moveToWatched(data);
+    dispatch({ type: "MOVE_TO_WATCHED", payload: data });
     navigate("/watched");
   };
 

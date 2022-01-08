@@ -32,28 +32,6 @@ export interface OMDBData {
   imdbVotes: string;
 }
 
-export interface FavContextTypes {
-  watchlist: OMDBData[];
-  watched: OMDBData[];
-  addToWatchlist: (data: OMDBData) => void;
-  removeFromWatchlist: (id: string) => void;
-  addToWatched: (data: OMDBData) => void;
-  removeFromWatched: (id: string) => void;
-  moveToWatched: (data: OMDBData) => void;
-}
-
-export interface FavReducer {
-  watchlist: OMDBData[];
-  watched: OMDBData[];
-}
-
-export type FavActions =
-  | { type: "ADD_TO_WATCHLIST"; data: OMDBData }
-  | { type: "REMOVE_FROM_WATCHLIST"; id: string }
-  | { type: "ADD_TO_WATCHED"; data: OMDBData }
-  | { type: "REMOVE_FROM_WATCHED"; id: string }
-  | { type: "MOVE_TO_WATCHED"; data: OMDBData };
-
 export interface NavLinks {
   id: number;
   text: string;
@@ -86,6 +64,9 @@ export interface Breakpoints {
   s: string;
 }
 
+export type SearchDispathch = (action: SearchActions) => void;
+export type FavDispatch = (action: FavActions) => void;
+
 export type SearchActions =
   | { type: typeof ActionTypes.SET_TITLE; payload: string }
   | { type: typeof ActionTypes.SET_YEAR; payload: string }
@@ -98,9 +79,25 @@ export interface SearchReducer {
   page: number;
   searchType: string;
 }
-export type Dispatch = (action: SearchActions) => void;
 
 export interface SearchContextType {
   state: SearchReducer;
-  dispatch: Dispatch;
+  dispatch: SearchDispathch;
+}
+
+export interface FavReducer {
+  watchlist: OMDBData[];
+  watched: OMDBData[];
+}
+
+export type FavActions =
+  | { type: typeof ActionTypes.ADD_TO_WATCHLIST; payload: OMDBData }
+  | { type: typeof ActionTypes.REMOVE_FROM_WATCHLIST; payload: string }
+  | { type: typeof ActionTypes.ADD_TO_WATCHED; payload: OMDBData }
+  | { type: typeof ActionTypes.REMOVE_FROM_WATCHED; payload: string }
+  | { type: typeof ActionTypes.MOVE_TO_WATCHED; payload: OMDBData };
+
+export interface FavContextType {
+  state: FavReducer;
+  dispatch: FavDispatch;
 }

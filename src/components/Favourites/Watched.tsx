@@ -7,7 +7,9 @@ import Background from "../Background/Background";
 import watched_bg from "../../assets/images/watched_bg.svg";
 
 const Watched: React.FC = () => {
-  const { watched } = useContext(FavContext);
+  const {
+    state: { watched },
+  } = useContext(FavContext);
 
   const data = {
     Response: watched.length === 0 ? "empty" : "added",

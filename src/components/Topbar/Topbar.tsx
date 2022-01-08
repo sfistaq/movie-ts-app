@@ -24,7 +24,9 @@ interface Props {
 
 const Topbar: React.FC<Props> = ({ menuOpen, windowWidth, setMenuOpen }) => {
   const location = useLocation();
-  const { watchlist, watched } = useContext(FavContext);
+  const {
+    state: { watchlist, watched },
+  } = useContext(FavContext);
 
   const navbarTitle = data
     .map((item: NavLinks) => item.link)
