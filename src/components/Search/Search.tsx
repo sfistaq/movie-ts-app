@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useRef } from "react";
 import { useQuery } from "react-query";
 import { apiRequest } from "../../api/apiRequest";
 import { SearchContext } from "../../store/Search/SearchState";
@@ -21,8 +21,8 @@ const Search: React.FC = () => {
     state: { title, year, page, searchType },
   } = useContext(SearchContext);
 
-  const [searchTitle, setSearchTitle] = useState<string>("");
-  const [searchYear, setSearchYear] = useState<string>("");
+  const titleRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
 
   const { data, status, isLoading } = useQuery(
     ["movies", page, title, year, searchType],
@@ -31,24 +31,25 @@ const Search: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch({ type: "SET_TITLE", payload: searchTitle });
-    dispatch({ type: "SET_YEAR", payload: searchYear });
+    dispatch({
+      type: "SET_TITLE",
+      payload: (titleRef.current as HTMLInputElement).value,
+    });
+    dispatch({
+      type: "SET_YEAR",
+      payload: (yearRef.current as HTMLInputElement).value,
+    });
     dispatch({ type: "SET_PAGE", payload: 1 });
   };
 
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    if (!searchTitle) {
+    if (!(titleRef.current as HTMLInputElement).value) {
       dispatch({ type: "SET_TITLE", payload: "" });
     }
     dispatch({ type: "SET_TYPE", payload: event.currentTarget.value });
     dispatch({ type: "SET_PAGE", payload: 1 });
   };
-
-  useEffect(() => {
-    setSearchTitle(title);
-    setSearchYear(year);
-  }, [title, year]);
 
   return (
     <Container>
@@ -71,30 +72,24 @@ const Search: React.FC = () => {
         }
       >
         <Input
+          ref={titleRef}
           autoFocus
           minLength={3}
           maxLength={60}
           required
           type="text"
           placeholder={`${searchType} title`}
-          value={searchTitle}
           inputWidth={300}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchTitle(event.target.value)
-          }
         />
         <Input
+          ref={yearRef}
           inputWidth={80}
           type="number"
           placeholder="year"
           min={1888}
           maxLength={4}
           minLength={4}
-          value={searchYear}
           max={new Date().getFullYear()}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchYear(event.target.value)
-          }
         />
 
         <Select value={searchType} onChange={handleChange} inputWidth={80}>
