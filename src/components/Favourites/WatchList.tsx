@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { FavContext } from "../../store/Favourite/FavState";
-import { SearchContext } from "../../store/Search/SearchState";
 import { Container } from "../../styles/global";
 import Results from "../Results/Results";
 import Status from "../Status/Status";
@@ -9,7 +8,6 @@ import watchlist_bg from "../../assets/images/watchlist_bg.svg";
 
 const WatchList: React.FC = () => {
   const { watchlist } = useContext(FavContext);
-  const { page, setPageHandler } = useContext(SearchContext);
 
   const data = {
     Response: watchlist.length === 0 ? "empty" : "added",
@@ -30,12 +28,7 @@ const WatchList: React.FC = () => {
       {watchlist.length === 0 ? (
         <Background image={watchlist_bg} />
       ) : (
-        <Results
-          data={data}
-          page={page}
-          setPage={setPageHandler}
-          buttons={false}
-        />
+        <Results data={data} buttons={false} />
       )}
     </Container>
   );

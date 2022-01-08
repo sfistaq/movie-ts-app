@@ -1,3 +1,5 @@
+import React, { useContext } from "react";
+import { SearchContext } from "../../store/Search/SearchState";
 import { ResponseData, MovieData } from "../../types/types";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
@@ -11,15 +13,19 @@ import blankPosterImage from "../../assets/images/blank-poster.jpeg";
 
 interface Props {
   data: ResponseData;
-  page: number;
   buttons: boolean;
-  setPage: (page: number) => void;
 }
 
-const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
+const Results: React.FC<Props> = ({ data, buttons }) => {
   const searchResultsLength = +data.totalResults;
   const pagesNumber =
     searchResultsLength <= 10 ? 1 : Math.floor(+data.totalResults / 10) + 1;
+
+  const {
+    dispatch,
+    state: { page },
+  } = useContext(SearchContext);
+
   return (
     <Wrapper center={buttons}>
       <ResultsItems>
@@ -36,13 +42,17 @@ const Results: React.FC<Props> = ({ data, page, setPage, buttons }) => {
       </ResultsItems>
       {buttons && (
         <ButtonsContainer>
-          <div onClick={() => setPage(page - 1)}>
+          <div
+            onClick={() => dispatch({ type: "SET_PAGE", payload: page - 1 })}
+          >
             <Button text="PREV" disabled={page === 1}></Button>
           </div>
           <Pages>
             {page} / {pagesNumber}
           </Pages>
-          <div onClick={() => setPage(page + 1)}>
+          <div
+            onClick={() => dispatch({ type: "SET_PAGE", payload: page + 1 })}
+          >
             <Button
               text="NEXT"
               disabled={

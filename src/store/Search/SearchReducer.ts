@@ -9,22 +9,22 @@ const movieReducer = (
     case actionTypes.SET_TITLE:
       return {
         ...state,
-        title: action.title,
+        title: action.payload,
       };
     case actionTypes.SET_YEAR:
       return {
         ...state,
-        year: action.year,
+        year: action.payload,
       };
     case actionTypes.SET_PAGE:
       return {
         ...state,
-        page: action.page,
+        page: action.payload,
       };
     case actionTypes.SET_TYPE:
       return {
         ...state,
-        searchType: action.searchType,
+        searchType: action.payload,
       };
 
     default:

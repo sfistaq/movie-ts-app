@@ -1,67 +1,32 @@
 import React, { createContext, useReducer } from "react";
-import { SearchContextTypes } from "../../types/types";
-import * as actionTypes from "../actionTypes";
+import {
+  SearchActions,
+  SearchContextType,
+  SearchReducer,
+} from "../../types/types";
+
 import searchReducer from "./SearchReducer";
 
-const initState: SearchContextTypes = {
+const initState: SearchReducer = {
   title: "",
   year: "",
   page: 1,
   searchType: "movie",
-  setTitleHandler: () => {},
-  setYearHandler: () => {},
-  setPageHandler: () => {},
-  setTypeHandler: () => {},
 };
 
-export const SearchContext = createContext<SearchContextTypes>(initState);
+const dispatch = (action: SearchActions) => {};
+
+export const SearchContext = createContext<SearchContextType>({
+  state: initState,
+  dispatch: dispatch,
+});
 
 const SearchState: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(searchReducer, initState);
 
-  const setTitleHandler = (title: string) => {
-    dispatch({
-      type: actionTypes.SET_TITLE,
-      title: title,
-    });
-  };
-
-  const setYearHandler = (year: string) => {
-    dispatch({
-      type: actionTypes.SET_YEAR,
-      year: year,
-    });
-  };
-
-  const setPageHandler = (page: number) => {
-    dispatch({
-      type: actionTypes.SET_PAGE,
-      page: page,
-    });
-  };
-
-  const setTypeHandler = (type: string) => {
-    dispatch({
-      type: actionTypes.SET_TYPE,
-      searchType: type,
-    });
-  };
-
+  const value = { state, dispatch };
   return (
-    <SearchContext.Provider
-      value={{
-        title: state.title,
-        year: state.year,
-        page: state.page,
-        searchType: state.searchType,
-        setTitleHandler: setTitleHandler,
-        setYearHandler: setYearHandler,
-        setPageHandler: setPageHandler,
-        setTypeHandler: setTypeHandler,
-      }}
-    >
-      {children}
-    </SearchContext.Provider>
+    <SearchContext.Provider value={value}>{children}</SearchContext.Provider>
   );
 };
 

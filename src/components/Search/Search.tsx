@@ -17,14 +17,8 @@ import * as constants from "../../utils/constants";
 
 const Search: React.FC = () => {
   const {
-    title,
-    year,
-    page,
-    searchType,
-    setTitleHandler,
-    setYearHandler,
-    setPageHandler,
-    setTypeHandler,
+    dispatch,
+    state: { title, year, page, searchType },
   } = useContext(SearchContext);
 
   const [searchTitle, setSearchTitle] = useState<string>("");
@@ -37,18 +31,18 @@ const Search: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setTitleHandler(searchTitle);
-    setYearHandler(searchYear);
-    setPageHandler(1);
+    dispatch({ type: "SET_TITLE", payload: searchTitle });
+    dispatch({ type: "SET_YEAR", payload: searchYear });
+    dispatch({ type: "SET_PAGE", payload: 1 });
   };
 
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     event.preventDefault();
     if (!searchTitle) {
-      setTitleHandler("");
+      dispatch({ type: "SET_TITLE", payload: "" });
     }
-    setTypeHandler(event.currentTarget.value);
-    setPageHandler(1);
+    dispatch({ type: "SET_TYPE", payload: event.currentTarget.value });
+    dispatch({ type: "SET_PAGE", payload: 1 });
   };
 
   useEffect(() => {
@@ -114,12 +108,7 @@ const Search: React.FC = () => {
       </Form>
 
       {data && data.Response !== "False" && (
-        <Results
-          data={data}
-          page={page}
-          setPage={setPageHandler}
-          buttons={true}
-        />
+        <Results data={data} buttons={true} />
       )}
 
       {status === "loading" && <Spinner />}

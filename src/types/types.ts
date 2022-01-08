@@ -1,3 +1,5 @@
+import * as ActionTypes from "../store/actionTypes";
+
 export interface RatingsType {
   Source: string;
   Value: string;
@@ -52,30 +54,6 @@ export type FavActions =
   | { type: "REMOVE_FROM_WATCHED"; id: string }
   | { type: "MOVE_TO_WATCHED"; data: OMDBData };
 
-export interface SearchContextTypes {
-  title: string;
-  year: string;
-  page: number;
-  searchType: string;
-  setTitleHandler: (title: string) => void;
-  setYearHandler: (year: string) => void;
-  setPageHandler: (page: number) => void;
-  setTypeHandler: (type: string) => void;
-}
-
-export interface SearchReducer {
-  title: string;
-  year: string;
-  page: number;
-  searchType: string;
-}
-
-export type SearchActions =
-  | { type: "SET_TITLE"; title: string }
-  | { type: "SET_YEAR"; year: string }
-  | { type: "SET_PAGE"; page: number }
-  | { type: "SET_TYPE"; searchType: string };
-
 export interface NavLinks {
   id: number;
   text: string;
@@ -106,4 +84,23 @@ export interface Breakpoints {
   l: string;
   m: string;
   s: string;
+}
+
+export type SearchActions =
+  | { type: typeof ActionTypes.SET_TITLE; payload: string }
+  | { type: typeof ActionTypes.SET_YEAR; payload: string }
+  | { type: typeof ActionTypes.SET_PAGE; payload: number }
+  | { type: typeof ActionTypes.SET_TYPE; payload: string };
+
+export interface SearchReducer {
+  title: string;
+  year: string;
+  page: number;
+  searchType: string;
+}
+export type Dispatch = (action: SearchActions) => void;
+
+export interface SearchContextType {
+  state: SearchReducer;
+  dispatch: Dispatch;
 }
